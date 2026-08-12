@@ -1,0 +1,12 @@
+[build]
+provider = "node"
+
+[install]
+cmd = "npm ci"
+
+[build.start]
+cmd = "npm run build"
+
+[deploy]
+start = "node .output/server/index.mjs"
+healthcheck = "/"
