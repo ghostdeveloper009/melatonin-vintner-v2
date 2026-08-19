@@ -21,13 +21,8 @@ import blackVelvet1 from "@/assets/products/black-velvet-1.jpg";
 
 /* ── Real product images from retail sources ── */
 import fourCousinsRed1 from "@/assets/products/four-cousins-red-1.png";
-import fourthStreet1 from "@/assets/products/4th-street-1.png";
-import capeMore1 from "@/assets/products/cape-more-1.jpg";
-import dominioRose1 from "@/assets/products/dominio-rose-1.jpg";
-import andreRose1 from "@/assets/products/andre-rose-1.png";
 import lordsGin1 from "@/assets/products/lords-gin-1.png";
 import monnet1 from "@/assets/products/monnet-1.png";
-import actionBitters1 from "@/assets/products/action-bitters-1.png";
 import originBitters1 from "@/assets/products/origin-bitters-1.png";
 
 /* ── AI-generated brand-specific product images ── */
@@ -130,7 +125,7 @@ export const products: Product[] = [
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "André",
-    image: andreRose1,
+    image: "https://ik.imagekit.io/wetfnu6pg/andre-rose-1.png",
     imageAlt: "André Brut Rosé champagne bottle with pink label",
     imageSource: "photo",
     description: "A delicate rosé with fruity character. Light, fresh and perfect for warm evenings and celebrations.",
@@ -143,7 +138,7 @@ export const products: Product[] = [
     traits: "Smooth • Fruity • Easy-Drinking",
     traitTags: ["Smooth", "Fruity", "Easy-Drinking"],
     brand: "4th Street",
-    image: fourthStreet1,
+    image: "https://ik.imagekit.io/wetfnu6pg/4th-street-1.png",
     imageAlt: "4th Street Sweet Red wine bottle with red and gold label, South Africa",
     imageSource: "photo",
     description: "Smooth, fruity and easy-drinking. An accessible wine that doesn't demand attention but rewards it.",
@@ -156,7 +151,7 @@ export const products: Product[] = [
     traits: "Rich • Smooth • Refined",
     traitTags: ["Rich", "Smooth", "Refined"],
     brand: "Cape More",
-    image: capeMore1,
+    image: "https://ik.imagekit.io/wetfnu6pg/cape-more-1.jpg",
     imageAlt: "Cape More Semi-Sweet Red wine bottle, Spanish red wine",
     imageSource: "photo",
     description: "Rich and refined with a smooth profile. A step up for those who appreciate depth without complexity.",
@@ -211,7 +206,7 @@ export const products: Product[] = [
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "Dominio",
-    image: dominioRose1,
+    image: "https://ik.imagekit.io/wetfnu6pg/dominio-rose-1.jpg",
     imageAlt: "Dominio Del Rey Sparkling Rosé wine bottle, Spanish sparkling wine",
     imageSource: "photo",
     description: "A delicate rosé with a fruity, easy character. Light on the palate, generous in the glass.",
@@ -390,7 +385,7 @@ export const products: Product[] = [
     traits: "Aromatic • Bold • Refreshing",
     traitTags: ["Aromatic", "Bold", "Refreshing"],
     brand: "Action",
-    image: actionBitters1,
+    image: "https://ik.imagekit.io/wetfnu6pg/action-bitters-1.png",
     imageAlt: "Action Bitters bottle with herbal branding, Nigerian alcoholic herbal bitters",
     imageSource: "photo",
     description: "Aromatic and bold with a refreshing edge. A bitters that brings character to any mix.",
