@@ -57,7 +57,9 @@ function ProductDetail() {
   const { product } = Route.useLoaderData();
   const { add, setOpen } = useCart();
   const [qty, setQty] = useState(1);
+  const [activeImage, setActiveImage] = useState(0);
 
+  const allImages = [product.image, ...(product.gallery ?? [])];
   const related = products
     .filter((p) => p.slug !== product.slug && p.category === product.category)
     .slice(0, 3);
@@ -75,17 +77,11 @@ function ProductDetail() {
         <nav aria-label="Breadcrumb" className="text-[0.65rem] tracking-[0.2em] uppercase">
           <ol className="flex gap-2 text-muted-foreground">
             <li>
-              <Link to="/collection" className="hover:text-foreground">
-                Collection
-              </Link>
+              <Link to="/collection" className="hover:text-foreground">Collection</Link>
             </li>
             <li aria-hidden>/</li>
             <li>
-              <Link
-                to="/collection"
-                search={{ category: product.category }}
-                className="hover:text-foreground"
-              >
+              <Link to="/collection" search={{ category: product.category }} className="hover:text-foreground">
                 {categoryLabel(product.category)}
               </Link>
             </li>
@@ -96,10 +92,12 @@ function ProductDetail() {
       </div>
 
       <article className="mx-auto grid max-w-[1400px] gap-14 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-20">
+        {/* Image gallery */}
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
           <div className="relative">
             <img
-              src={product.image}
+              key={activeImage}
+              src={allImages[activeImage]}
               alt={product.imageAlt}
               width={912}
               height={1200}
@@ -111,8 +109,34 @@ function ProductDetail() {
               </span>
             )}
           </div>
+
+          {/* Gallery thumbnails */}
+          {allImages.length > 1 && (
+            <div className="mt-4 flex gap-3">
+              {allImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImage(i)}
+                  aria-label={`View image ${i + 1} of ${allImages.length}`}
+                  className={`relative overflow-hidden border-2 transition-colors ${
+                    activeImage === i ? "border-accent" : "border-transparent hover:border-border"
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    loading="lazy"
+                    width={120}
+                    height={160}
+                    className="h-20 w-16 object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </Reveal>
 
+        {/* Product info */}
         <div>
           <Reveal>
             {product.badge && (
@@ -120,19 +144,13 @@ function ProductDetail() {
                 {badgeLabel(product.badge)}
               </p>
             )}
-            <p className="eyebrow">
-              {categoryLabel(product.category)}
-            </p>
+            <p className="eyebrow">{categoryLabel(product.category)}</p>
             <h1 className="mt-5 font-display text-5xl leading-[1.02] sm:text-6xl">
               {product.name}
             </h1>
-            <p className="mt-3 text-base text-muted-foreground">
-              {product.brand}
-            </p>
+            <p className="mt-3 text-base text-muted-foreground">{product.brand}</p>
             <div className="mt-8">
-              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
-                Price
-              </p>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">Price</p>
               <a
                 href={siteConfig.whatsappHref}
                 target="_blank"
@@ -151,19 +169,13 @@ function ProductDetail() {
                   aria-label="Decrease quantity"
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
                   className="px-5 py-4 text-muted-foreground hover:text-foreground"
-                >
-                  −
-                </button>
-                <span className="w-10 text-center text-sm" aria-live="polite">
-                  {qty}
-                </span>
+                >−</button>
+                <span className="w-10 text-center text-sm" aria-live="polite">{qty}</span>
                 <button
                   aria-label="Increase quantity"
                   onClick={() => setQty((q) => q + 1)}
                   className="px-5 py-4 text-muted-foreground hover:text-foreground"
-                >
-                  +
-                </button>
+                >+</button>
               </div>
               <button
                 disabled={!product.inStock}
@@ -182,15 +194,10 @@ function ProductDetail() {
           <Reveal delay={160}>
             <div className="mt-14">
               <h2 className="eyebrow">Profile</h2>
-              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                {product.description}
-              </p>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
               <ul className="mt-6 flex flex-wrap gap-3">
                 {product.traitTags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="border border-accent/30 px-5 py-3 text-xs tracking-[0.14em] text-accent uppercase"
-                  >
+                  <li key={tag} className="border border-accent/30 px-5 py-3 text-xs tracking-[0.14em] text-accent uppercase">
                     {tag}
                   </li>
                 ))}
@@ -204,9 +211,7 @@ function ProductDetail() {
               <dl className="mt-6 grid grid-cols-2 gap-px border border-border bg-border">
                 {specs.map(([k, v]) => (
                   <div key={k} className="bg-background p-5">
-                    <dt className="text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">
-                      {k}
-                    </dt>
+                    <dt className="text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">{k}</dt>
                     <dd className="mt-2 text-sm text-foreground">{v}</dd>
                   </div>
                 ))}
@@ -217,18 +222,11 @@ function ProductDetail() {
       </article>
 
       {related.length > 0 && (
-        <section
-          aria-labelledby="related-heading"
-          className="border-t border-border"
-        >
+        <section aria-labelledby="related-heading" className="border-t border-border">
           <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
-            <h2 id="related-heading" className="font-display text-3xl sm:text-4xl">
-              You may also pour
-            </h2>
+            <h2 id="related-heading" className="font-display text-3xl sm:text-4xl">You may also pour</h2>
             <div className="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
-                <WineCard key={p.slug} wine={p} />
-              ))}
+              {related.map((p) => <WineCard key={p.slug} wine={p} />)}
             </div>
           </div>
         </section>

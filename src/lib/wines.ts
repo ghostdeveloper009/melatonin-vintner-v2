@@ -7,9 +7,23 @@ import catRum from "@/assets/cat-rum.jpg";
 import catBitters from "@/assets/cat-bitters.jpg";
 import catOther from "@/assets/cat-other.jpg";
 
-/* Per-product unlabeled bottle photos (20 distinct images).
- * All generated as honest placeholders — no fabricated labels or brand names.
- * Replace individually with real photography as it becomes available. */
+/* ── Real product photography (from Ishieke stock) ── */
+import mixedSouthernSnow1 from "@/assets/products/mixed-southern-snow-1.jpg";
+import mixedSouthernSnow2 from "@/assets/products/mixed-southern-snow-2.png";
+import tomaCab1 from "@/assets/products/toma-cab-1.jpg";
+import tomaSaperavi1 from "@/assets/products/toma-saperavi-1.jpg";
+import fourCousinsSparkling1 from "@/assets/products/four-cousins-sparkling-1.jpg";
+import fourCousinsRose1 from "@/assets/products/four-cousins-rose-1.jpg";
+import capeDiscovery1 from "@/assets/products/cape-discovery-1.jpg";
+import eightPmWhisky1 from "@/assets/products/8pm-whisky-1.jpg";
+import zenithWhiskyHoney1 from "@/assets/products/zenith-whisky-honey-1.jpg";
+import blackVelvet1 from "@/assets/products/black-velvet-1.jpg";
+
+/* ── AI-generated brand-specific product images ── */
+import carloRossiImg from "@/assets/products/carlo-rossi.jpg";
+import azulBuenAmigo from "@/assets/products/azul-buen-amigo.png";
+
+/* ── AI-generated generic unlabeled placeholders (no brand labels) ── */
 import redWine1 from "@/assets/products/red-wine-1.jpg";
 import redWine2 from "@/assets/products/red-wine-2.jpg";
 import redWine3 from "@/assets/products/red-wine-3.jpg";
@@ -17,7 +31,6 @@ import whiteWine1 from "@/assets/products/white-wine-1.jpg";
 import roseWine1 from "@/assets/products/rose-wine-1.jpg";
 import sparkling1 from "@/assets/products/sparkling-1.jpg";
 import whisky1 from "@/assets/products/whisky-1.jpg";
-import whisky2 from "@/assets/products/whisky-2.jpg";
 import vodka1 from "@/assets/products/vodka-1.jpg";
 import vodka2 from "@/assets/products/vodka-2.jpg";
 import gin1 from "@/assets/products/gin-1.jpg";
@@ -31,39 +44,15 @@ import bitters2 from "@/assets/products/bitters-2.jpg";
 import agave1 from "@/assets/products/agave-1.jpg";
 import flask1 from "@/assets/products/flask-1.jpg";
 
-/**
- * MELATONIN VINTNER — Premium Drinks Collection
- *
- * Product catalog with 28 curated products across 8 categories.
- * Trait descriptions provided by the brand. Prices are not published —
- * customers enquire via phone or WhatsApp.
- *
- * IMAGES: Every product has its own `image` field pointing to an individual
- * asset file. All current images are unlabeled bottle placeholders
- * (imageSource: "placeholder") — no fabricated labels or brand names.
- * Swap individual files with real photography as it becomes available.
- */
-
 export type ProductCategory =
-  | "wine"
-  | "whisky"
-  | "vodka"
-  | "gin"
-  | "cognac"
-  | "rum"
-  | "bitters"
-  | "other";
+  | "wine" | "whisky" | "vodka" | "gin" | "cognac" | "rum" | "bitters" | "other";
 
 export type WineSubType = "red" | "white" | "rose" | "sparkling" | "dessert" | null;
 
 export type ImageSource = "photo" | "brand-asset" | "placeholder";
 
 export type CurationBadge =
-  | "vintners-choice"
-  | "premium-selection"
-  | "editors-pick"
-  | "best-celebrations"
-  | "best-dinner";
+  | "vintners-choice" | "premium-selection" | "editors-pick" | "best-celebrations" | "best-dinner";
 
 export interface Product {
   slug: string;
@@ -73,13 +62,12 @@ export interface Product {
   traits: string;
   traitTags: string[];
   brand: string;
-  /** Individual product image — never a shared category image */
   image: string;
-  /** Descriptive alt text for accessibility/SEO — describes the image, not the marketing */
   imageAlt: string;
-  description: string;
-  /** Flags whether the image is real photography or a placeholder */
   imageSource: ImageSource;
+  /** Additional images for gallery display on product detail page */
+  gallery?: string[];
+  description: string;
   nairaPrice?: number;
   inStock: boolean;
   featured?: boolean;
@@ -118,39 +106,33 @@ export const products: Product[] = [
   {
     slug: "carlo-rossi",
     name: "Carlo Rossi",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Classic • Smooth • Elegant",
     traitTags: ["Classic", "Smooth", "Elegant"],
     brand: "Carlo Rossi",
-    image: redWine1,
-    imageAlt: "Unlabeled tall red wine bottle with dark glass on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: carloRossiImg,
+    imageAlt: "Carlo Rossi red wine bottle with classic label on a dark surface",
+    imageSource: "brand-asset",
     description: "A classic choice known for its smooth, approachable character. Elegant enough for the table, easy enough for any evening.",
-    inStock: true,
-    featured: true,
-    badge: "vintners-choice",
+    inStock: true, featured: true, badge: "vintners-choice",
   },
   {
     slug: "four-cousins",
     name: "Four Cousins",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Fruity • Smooth • Refreshing",
     traitTags: ["Fruity", "Smooth", "Refreshing"],
     brand: "Van Loveren",
     image: redWine2,
-    imageAlt: "Unlabeled rounder red wine bottle on a walnut surface, placeholder product photo",
+    imageAlt: "Unlabeled round red wine bottle on a walnut surface, placeholder product photo",
     imageSource: "placeholder",
     description: "Fruity and refreshing with a smooth finish. A popular favourite that's easy to enjoy and easy to share.",
-    inStock: true,
-    featured: true,
+    inStock: true, featured: true,
   },
   {
     slug: "andre-rose",
     name: "André Rosé",
-    category: "wine",
-    wineSubType: "rose",
+    category: "wine", wineSubType: "rose",
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "André",
@@ -163,8 +145,7 @@ export const products: Product[] = [
   {
     slug: "4th-street",
     name: "4th Street",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Smooth • Fruity • Easy-Drinking",
     traitTags: ["Smooth", "Fruity", "Easy-Drinking"],
     brand: "4th Street",
@@ -177,8 +158,7 @@ export const products: Product[] = [
   {
     slug: "cape-more",
     name: "Cape More",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Rich • Smooth • Refined",
     traitTags: ["Rich", "Smooth", "Refined"],
     brand: "Cape More",
@@ -191,52 +171,49 @@ export const products: Product[] = [
   {
     slug: "mixed-southern-snow",
     name: "Mixed Southern Snow",
-    category: "wine",
-    wineSubType: "white",
+    category: "wine", wineSubType: "red",
     traits: "Fruity • Refreshing • Smooth",
     traitTags: ["Fruity", "Refreshing", "Smooth"],
     brand: "Mixed Southern",
-    image: whiteWine1,
-    imageAlt: "Unlabeled white wine bottle with clear pale green glass on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
-    description: "Fruity and refreshing with a smooth finish. A cool, easy white for casual premium moments.",
+    image: mixedSouthernSnow1,
+    imageAlt: "Mixed Southern Snow premium sweet red wine bottle with mountain landscape label, Western Cape, South Africa",
+    imageSource: "photo",
+    gallery: [mixedSouthernSnow2],
+    description: "Fruity and refreshing with a smooth finish. A cool, easy red for casual premium moments.",
     inStock: true,
   },
   {
     slug: "toma",
     name: "Toma",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Elegant • Smooth • Enjoyable",
     traitTags: ["Elegant", "Smooth", "Enjoyable"],
     brand: "Toma",
-    image: redWine2,
-    imageAlt: "Unlabeled round red wine bottle on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: tomaCab1,
+    imageAlt: "Toma Cabernet Sauvignon 2021 wine bottle with gold crest label, oak aged, Nigeria",
+    imageSource: "photo",
+    gallery: [tomaSaperavi1],
     description: "Elegant and smooth with broad appeal. A wine that's simply enjoyable — no ceremony required.",
     inStock: true,
   },
   {
     slug: "four-cousins-sparkling",
     name: "Four Cousins Sparkling",
-    category: "wine",
-    wineSubType: "sparkling",
+    category: "wine", wineSubType: "sparkling",
     traits: "Celebratory • Crisp • Refreshing",
     traitTags: ["Celebratory", "Crisp", "Refreshing"],
     brand: "Van Loveren",
-    image: sparkling1,
-    imageAlt: "Unlabeled sparkling wine bottle with gold foil neck on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: fourCousinsSparkling1,
+    imageAlt: "Four Cousins Sparkling Natural Sweet wine bottle with gold foil neck and four men illustration label, South Africa",
+    imageSource: "photo",
+    gallery: [fourCousinsRose1],
     description: "Crisp and refreshing with a celebratory spirit. For the moments worth marking with a pop.",
-    inStock: true,
-    featured: true,
-    badge: "best-celebrations",
+    inStock: true, featured: true, badge: "best-celebrations",
   },
   {
     slug: "dominio-rose",
     name: "Dominio Rosé",
-    category: "wine",
-    wineSubType: "rose",
+    category: "wine", wineSubType: "rose",
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "Dominio",
@@ -249,14 +226,13 @@ export const products: Product[] = [
   {
     slug: "cape-discovery",
     name: "Cape Discovery",
-    category: "wine",
-    wineSubType: "red",
+    category: "wine", wineSubType: "red",
     traits: "Smooth • Fruity • Approachable",
     traitTags: ["Smooth", "Fruity", "Approachable"],
     brand: "Cape Discovery",
-    image: redWine3,
-    imageAlt: "Unlabeled Bordeaux-style red wine bottle, placeholder product photo",
-    imageSource: "placeholder",
+    image: capeDiscovery1,
+    imageAlt: "Cape Discovery Cape Red wine bottle with compass rose label and mountain silhouette, Western Cape, South Africa",
+    imageSource: "photo",
     description: "Smooth and approachable with a fruity profile. A welcoming wine for any table.",
     inStock: true,
   },
@@ -265,44 +241,39 @@ export const products: Product[] = [
   {
     slug: "8pm-whisky",
     name: "8 PM Whisky",
-    category: "whisky",
-    wineSubType: null,
+    category: "whisky", wineSubType: null,
     traits: "Bold • Smooth • Distinctive",
     traitTags: ["Bold", "Smooth", "Distinctive"],
     brand: "8 PM",
-    image: whisky1,
-    imageAlt: "Unlabeled square-shouldered whisky bottle with amber liquid on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: eightPmWhisky1,
+    imageAlt: "8 PM Premium Black Whisky bottle with gold 8 PM logo and red crest label, amber liquid",
+    imageSource: "photo",
     description: "Bold and distinctive with a smooth finish. A whisky that makes its presence known without demanding experience.",
-    inStock: true,
-    featured: true,
-    badge: "editors-pick",
+    inStock: true, featured: true, badge: "editors-pick",
   },
   {
     slug: "zenith-whisky-honey",
     name: "Zenith Whisky & Honey",
-    category: "whisky",
-    wineSubType: null,
+    category: "whisky", wineSubType: null,
     traits: "Rich • Smooth • Honeyed",
     traitTags: ["Rich", "Smooth", "Honeyed"],
     brand: "Zenith",
-    image: whisky2,
-    imageAlt: "Unlabeled round whisky bottle with amber liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: zenithWhiskyHoney1,
+    imageAlt: "Zenith Whisky & Honey bottle with black label, gold Z crest, red accent, flavoured spirit drink, Nigerian made",
+    imageSource: "photo",
     description: "Rich and smooth with a honeyed warmth. A whisky that leans into comfort — rounded, sweet, generous.",
     inStock: true,
   },
   {
     slug: "black-velvet",
     name: "Black Velvet",
-    category: "whisky",
-    wineSubType: null,
+    category: "whisky", wineSubType: null,
     traits: "Smooth • Full-Bodied • Classic",
     traitTags: ["Smooth", "Full-Bodied", "Classic"],
     brand: "Black Velvet",
-    image: whisky1,
-    imageAlt: "Unlabeled square whisky bottle with amber liquid, placeholder product photo",
-    imageSource: "placeholder",
+    image: blackVelvet1,
+    imageAlt: "Black Velvet blended Canadian whisky bottle with black label and gold brand name, amber liquid",
+    imageSource: "photo",
     description: "A classic Canadian whisky — smooth and full-bodied with a timeless profile.",
     inStock: true,
   },
@@ -311,8 +282,7 @@ export const products: Product[] = [
   {
     slug: "smirnoff-premium",
     name: "Smirnoff Premium",
-    category: "vodka",
-    wineSubType: null,
+    category: "vodka", wineSubType: null,
     traits: "Clean • Crisp • Versatile",
     traitTags: ["Clean", "Crisp", "Versatile"],
     brand: "Smirnoff",
@@ -320,14 +290,12 @@ export const products: Product[] = [
     imageAlt: "Unlabeled clear glass vodka bottle on a dark surface, placeholder product photo",
     imageSource: "placeholder",
     description: "Clean, crisp and endlessly versatile. The reliable choice for cocktails and mixed drinks.",
-    inStock: true,
-    featured: true,
+    inStock: true, featured: true,
   },
   {
     slug: "ciroc",
     name: "Cîroc",
-    category: "vodka",
-    wineSubType: null,
+    category: "vodka", wineSubType: null,
     traits: "Refined • Smooth • Premium",
     traitTags: ["Refined", "Smooth", "Premium"],
     brand: "Cîroc",
@@ -335,17 +303,14 @@ export const products: Product[] = [
     imageAlt: "Unlabeled frosted glass vodka bottle on a dark surface, placeholder product photo",
     imageSource: "placeholder",
     description: "Refined and premium with a smooth, grape-derived character. A vodka that stands on its own.",
-    inStock: true,
-    featured: true,
-    badge: "premium-selection",
+    inStock: true, featured: true, badge: "premium-selection",
   },
 
   /* ── GIN ── */
   {
     slug: "lords-gin",
     name: "Lords Gin",
-    category: "gin",
-    wineSubType: null,
+    category: "gin", wineSubType: null,
     traits: "Classic • Aromatic • Smooth",
     traitTags: ["Classic", "Aromatic", "Smooth"],
     brand: "Lords",
@@ -358,8 +323,7 @@ export const products: Product[] = [
   {
     slug: "british-soldier",
     name: "British Soldier",
-    category: "gin",
-    wineSubType: null,
+    category: "gin", wineSubType: null,
     traits: "Bold • Refreshing • Distinctive",
     traitTags: ["Bold", "Refreshing", "Distinctive"],
     brand: "British Soldier",
@@ -372,8 +336,7 @@ export const products: Product[] = [
   {
     slug: "squadron-premium",
     name: "Squadron Premium Size",
-    category: "gin",
-    wineSubType: null,
+    category: "gin", wineSubType: null,
     traits: "Smooth • Classic • Full-Bodied",
     traitTags: ["Smooth", "Classic", "Full-Bodied"],
     brand: "Squadron",
@@ -388,8 +351,7 @@ export const products: Product[] = [
   {
     slug: "monnet",
     name: "Monnet",
-    category: "cognac",
-    wineSubType: null,
+    category: "cognac", wineSubType: null,
     traits: "Refined • Smooth • Elegant",
     traitTags: ["Refined", "Smooth", "Elegant"],
     brand: "Monnet",
@@ -402,8 +364,7 @@ export const products: Product[] = [
   {
     slug: "martell",
     name: "Martell",
-    category: "cognac",
-    wineSubType: null,
+    category: "cognac", wineSubType: null,
     traits: "Rich • Sophisticated • Classic",
     traitTags: ["Rich", "Sophisticated", "Classic"],
     brand: "Martell",
@@ -411,15 +372,12 @@ export const products: Product[] = [
     imageAlt: "Unlabeled round cognac bottle with amber liquid on a dark surface, placeholder product photo",
     imageSource: "placeholder",
     description: "Rich and sophisticated — one of the great cognac houses. Classic for a reason.",
-    inStock: true,
-    featured: true,
-    badge: "premium-selection",
+    inStock: true, featured: true, badge: "premium-selection",
   },
   {
     slug: "hennessy",
     name: "Hennessy",
-    category: "cognac",
-    wineSubType: null,
+    category: "cognac", wineSubType: null,
     traits: "Iconic • Refined • Full-Bodied",
     traitTags: ["Iconic", "Refined", "Full-Bodied"],
     brand: "Hennessy",
@@ -427,15 +385,12 @@ export const products: Product[] = [
     imageAlt: "Unlabeled squat wide cognac bottle with amber liquid on a dark surface, placeholder product photo",
     imageSource: "placeholder",
     description: "Iconic and refined with a full-bodied presence. The cognac that defines the category.",
-    inStock: true,
-    featured: true,
-    badge: "vintners-choice",
+    inStock: true, featured: true, badge: "vintners-choice",
   },
   {
     slug: "remy-martin",
     name: "Rémy Martin",
-    category: "cognac",
-    wineSubType: null,
+    category: "cognac", wineSubType: null,
     traits: "Elegant • Rich • Distinctive",
     traitTags: ["Elegant", "Rich", "Distinctive"],
     brand: "Rémy Martin",
@@ -448,8 +403,7 @@ export const products: Product[] = [
   {
     slug: "garret",
     name: "Garret",
-    category: "cognac",
-    wineSubType: null,
+    category: "cognac", wineSubType: null,
     traits: "Smooth • Classic • Enjoyable",
     traitTags: ["Smooth", "Classic", "Enjoyable"],
     brand: "Garret",
@@ -464,8 +418,7 @@ export const products: Product[] = [
   {
     slug: "old-captain",
     name: "Old Captain",
-    category: "rum",
-    wineSubType: null,
+    category: "rum", wineSubType: null,
     traits: "Rich • Smooth • Distinctive",
     traitTags: ["Rich", "Smooth", "Distinctive"],
     brand: "Old Captain",
@@ -480,8 +433,7 @@ export const products: Product[] = [
   {
     slug: "origin-premium",
     name: "Origin Premium Size",
-    category: "bitters",
-    wineSubType: null,
+    category: "bitters", wineSubType: null,
     traits: "Bold • Distinctive • Full-Bodied",
     traitTags: ["Bold", "Distinctive", "Full-Bodied"],
     brand: "Origin",
@@ -494,8 +446,7 @@ export const products: Product[] = [
   {
     slug: "action-bitters",
     name: "Action Bitters",
-    category: "bitters",
-    wineSubType: null,
+    category: "bitters", wineSubType: null,
     traits: "Aromatic • Bold • Refreshing",
     traitTags: ["Aromatic", "Bold", "Refreshing"],
     brand: "Action",
@@ -510,8 +461,7 @@ export const products: Product[] = [
   {
     slug: "good-fathers",
     name: "Good Fathers",
-    category: "other",
-    wineSubType: null,
+    category: "other", wineSubType: null,
     traits: "Smooth • Distinctive • Classic",
     traitTags: ["Smooth", "Distinctive", "Classic"],
     brand: "Good Fathers",
@@ -524,30 +474,22 @@ export const products: Product[] = [
   {
     slug: "buen-amigo",
     name: "Buen Amigo",
-    category: "other",
-    wineSubType: null,
+    category: "other", wineSubType: null,
     traits: "Bold • Vibrant • Agave Spirit",
     traitTags: ["Bold", "Vibrant", "Agave Spirit"],
     brand: "Buen Amigo",
-    image: agave1,
-    imageAlt: "Unlabeled agave spirit bottle with clear golden liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: azulBuenAmigo,
+    imageAlt: "Clase Azul Reposado tequila bottle, cream ceramic with blue painted details and gold agave symbol",
+    imageSource: "brand-asset",
     description: "Bold and vibrant — an agave spirit with energy. For the moments that call for something different.",
-    inStock: true,
-    badge: "editors-pick",
+    inStock: true, badge: "editors-pick",
   },
 ];
 
 /* ── Helpers ── */
-
-export const categoryLabel = (id: ProductCategory) =>
-  categories.find((c) => c.id === id)?.label ?? id;
-
-export const badgeLabel = (id: CurationBadge) =>
-  curationBadges.find((c) => c.id === id)?.label ?? id;
-
-export const getProduct = (slug: string) =>
-  products.find((p) => p.slug === slug);
+export const categoryLabel = (id: ProductCategory) => categories.find((c) => c.id === id)?.label ?? id;
+export const badgeLabel = (id: CurationBadge) => curationBadges.find((c) => c.id === id)?.label ?? id;
+export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 
 /* ── Backward compatibility ── */
 export type Wine = Product;
