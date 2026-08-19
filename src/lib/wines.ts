@@ -29,8 +29,6 @@ import lordsGin1 from "@/assets/products/lords-gin-1.png";
 import monnet1 from "@/assets/products/monnet-1.png";
 import actionBitters1 from "@/assets/products/action-bitters-1.png";
 import originBitters1 from "@/assets/products/origin-bitters-1.png";
-import oldCaptain1 from "@/assets/products/old-captain-1.jpg";
-import squadron1 from "@/assets/products/squadron-1.jpg";
 
 /* ── AI-generated brand-specific product images ── */
 import carloRossiImg from "@/assets/products/carlo-rossi.jpg";
@@ -40,11 +38,6 @@ import martell1 from "@/assets/products/martell-1.jpg";
 import remyMartin1 from "@/assets/products/remy-martin-1.jpg";
 import smirnoff1 from "@/assets/products/smirnoff-1.jpg";
 import ciroc1 from "@/assets/products/ciroc-1.jpg";
-
-/* ── Remaining generic placeholders (no brand labels found online) ── */
-import gin1 from "@/assets/products/gin-1.jpg";
-import cognac2 from "@/assets/products/cognac-2.jpg";
-import flask1 from "@/assets/products/flask-1.jpg";
 
 export type ProductCategory =
   | "wine" | "whisky" | "vodka" | "gin" | "cognac" | "rum" | "bitters" | "other";
@@ -321,32 +314,6 @@ export const products: Product[] = [
     description: "Classic and aromatic with a smooth finish. A gin that plays well with tonic, or stands alone.",
     inStock: true,
   },
-  {
-    slug: "british-soldier",
-    name: "British Soldier",
-    category: "gin", wineSubType: null,
-    traits: "Bold • Refreshing • Distinctive",
-    traitTags: ["Bold", "Refreshing", "Distinctive"],
-    brand: "British Soldier",
-    image: gin1,
-    imageAlt: "Unlabeled gin bottle, placeholder product photo",
-    imageSource: "placeholder",
-    description: "Bold and distinctive with a refreshing edge. A gin with personality — not for the cautious.",
-    inStock: true,
-  },
-  {
-    slug: "squadron-premium",
-    name: "Squadron Premium Size",
-    category: "gin", wineSubType: null,
-    traits: "Smooth • Classic • Full-Bodied",
-    traitTags: ["Smooth", "Classic", "Full-Bodied"],
-    brand: "Squadron",
-    image: squadron1,
-    imageAlt: "Squadron Blended Dark Rum bottle with distinctive concave sides, Nigerian spirit",
-    imageSource: "photo",
-    description: "Smooth and full-bodied with a classic profile. Generous in size, generous in character.",
-    inStock: true,
-  },
 
   /* ── COGNAC & BRANDY ── */
   {
@@ -401,34 +368,6 @@ export const products: Product[] = [
     description: "Elegant and rich with a distinctive character. A cognac of standing and tradition.",
     inStock: true,
   },
-  {
-    slug: "garret",
-    name: "Garret",
-    category: "cognac", wineSubType: null,
-    traits: "Smooth • Classic • Enjoyable",
-    traitTags: ["Smooth", "Classic", "Enjoyable"],
-    brand: "Garret",
-    image: cognac2,
-    imageAlt: "Unlabeled round cognac bottle, placeholder product photo",
-    imageSource: "placeholder",
-    description: "Smooth and classic with an enjoyable, approachable profile. A brandy for everyday refinement.",
-    inStock: true,
-  },
-
-  /* ── RUM ── */
-  {
-    slug: "old-captain",
-    name: "Old Captain",
-    category: "rum", wineSubType: null,
-    traits: "Rich • Smooth • Distinctive",
-    traitTags: ["Rich", "Smooth", "Distinctive"],
-    brand: "Old Captain",
-    image: oldCaptain1,
-    imageAlt: "Old Captain rum bottle with captain figure, dark Caribbean rum",
-    imageSource: "photo",
-    description: "Rich and smooth with a distinctive character. A rum with depth and warmth.",
-    inStock: true,
-  },
 
   /* ── BITTERS & SPECIALTY ── */
   {
@@ -459,19 +398,6 @@ export const products: Product[] = [
   },
 
   /* ── OTHER PREMIUM SPIRITS ── */
-  {
-    slug: "good-fathers",
-    name: "Good Fathers",
-    category: "other", wineSubType: null,
-    traits: "Smooth • Distinctive • Classic",
-    traitTags: ["Smooth", "Distinctive", "Classic"],
-    brand: "Good Fathers",
-    image: flask1,
-    imageAlt: "Unlabeled classic flask-shaped spirits bottle, placeholder product photo",
-    imageSource: "placeholder",
-    description: "Smooth and distinctive with a classic profile. A premium spirit that earns its place.",
-    inStock: true,
-  },
   {
     slug: "buen-amigo",
     name: "Buen Amigo",
