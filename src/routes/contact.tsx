@@ -11,115 +11,149 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Speak to Melatonin Vintner about private selections, gifting, shipping, returns or trade enquiries.",
+          "Get in touch with Melatonin Vintner. Call 08070430838. Based in Ishieke.",
       },
-      { property: "og:title", content: "Contact — Melatonin Vintner" },
-      {
-        property: "og:description",
-        content:
-          "Private selections, gifting, shipping and trade enquiries — we reply personally.",
-      },
-      { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),
-  component: ContactPage,
+  component: Contact,
 });
 
-function ContactPage() {
-  const [sent, setSent] = useState(false);
+function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <SiteLayout>
-      <section className="mx-auto grid max-w-[1400px] gap-16 px-5 pt-40 pb-24 sm:px-8 sm:pt-48 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
-        <Reveal>
-          <p className="eyebrow">Contact</p>
-          <h1 className="mt-5 font-display text-5xl leading-[1.02] sm:text-6xl">
-            Write to the house
-          </h1>
-          <p className="mt-7 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Private selections, gifting, allocations, shipping and returns, or
-            trade enquiries. A person reads every message.
-          </p>
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-5 pt-40 pb-16 sm:px-8 sm:pt-48">
+          <Reveal>
+            <p className="eyebrow">Get in touch</p>
+            <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] sm:text-7xl">
+              Contact
+              <span className="block italic text-accent">Melatonin Vintner</span>
+            </h1>
+          </Reveal>
+        </div>
+      </section>
 
-          <dl className="mt-12 space-y-8">
-            {[
-              ["Email", "hello@placeholder-domain.com"],
-              ["Telephone", "+0 000 000 0000 (placeholder)"],
-              ["Cellar Door", "Placeholder Address, Placeholder City"],
-              ["Hours", "Monday–Saturday, placeholder hours"],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <dt className="text-[0.65rem] tracking-[0.22em] text-accent uppercase">
-                  {k}
-                </dt>
-                <dd className="mt-2 text-sm text-muted-foreground">{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-10 text-xs leading-relaxed text-muted-foreground/70">
-            Contact details above are placeholders and should be replaced with
-            your real business information before launch.
-          </p>
+      <section className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-2 lg:gap-24">
+        <Reveal>
+          <h2 className="font-display text-3xl">Reach us directly</h2>
+          <div className="mt-8 space-y-6">
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                Phone
+              </p>
+              <a
+                href="tel:08070430838"
+                className="mt-2 block font-display text-2xl text-foreground transition-colors hover:text-accent"
+              >
+                08070430838
+              </a>
+            </div>
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                Location
+              </p>
+              <p className="mt-2 text-sm text-foreground">Ishieke</p>
+            </div>
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                TikTok
+              </p>
+              <a
+                href="https://www.tiktok.com/@mellatonin_vintner"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block text-sm text-foreground transition-colors hover:text-accent"
+              >
+                @mellatonin_vintner
+              </a>
+            </div>
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                Instagram
+              </p>
+              <a
+                href="https://www.instagram.com/mellatonin_vintner"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block text-sm text-foreground transition-colors hover:text-accent"
+              >
+                @mellatonin_vintner
+              </a>
+            </div>
+          </div>
         </Reveal>
 
         <Reveal delay={120}>
+          <h2 className="font-display text-3xl">Send a message</h2>
           <form
-            className="border border-border p-8 sm:p-10"
+            className="mt-8 space-y-6"
             onSubmit={(e) => {
               e.preventDefault();
-              setSent(true);
-              toast.success("Message received — we'll reply shortly.");
+              setName("");
+              setEmail("");
+              setMessage("");
+              toast.success("Thank you — we'll be in touch shortly.");
             }}
           >
-            <div className="space-y-8">
-              {[
-                { id: "name", label: "Name", type: "text", autoComplete: "name" },
-                { id: "email", label: "Email", type: "email", autoComplete: "email" },
-                { id: "subject", label: "Subject", type: "text" },
-              ].map((f) => (
-                <div key={f.id}>
-                  <label
-                    htmlFor={f.id}
-                    className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase"
-                  >
-                    {f.label}
-                  </label>
-                  <input
-                    id={f.id}
-                    name={f.id}
-                    type={f.type}
-                    autoComplete={f.autoComplete}
-                    required
-                    className="mt-3 w-full border-b border-border bg-transparent py-3 text-sm text-foreground focus:border-accent focus:outline-none"
-                  />
-                </div>
-              ))}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  required
-                  className="mt-3 w-full resize-none border-b border-border bg-transparent py-3 text-sm text-foreground focus:border-accent focus:outline-none"
-                />
-              </div>
+            <div>
+              <label
+                htmlFor="name"
+                className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-3 w-full border-b border-border bg-transparent py-3 text-sm text-foreground focus:border-accent focus:outline-none"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-3 w-full border-b border-border bg-transparent py-3 text-sm text-foreground focus:border-accent focus:outline-none"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                required
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="mt-3 w-full border-b border-border bg-transparent py-3 text-sm text-foreground focus:border-accent focus:outline-none"
+              />
             </div>
             <button
               type="submit"
-              className="mt-10 w-full bg-accent px-10 py-4 text-xs tracking-[0.26em] text-accent-foreground uppercase transition-colors duration-500 hover:bg-accent/85"
+              className="bg-accent px-10 py-4 text-xs tracking-[0.26em] text-accent-foreground uppercase transition-colors duration-500 hover:bg-accent/85"
             >
-              Send message
+              Send Message
             </button>
-            <p aria-live="polite" className="mt-4 min-h-5 text-xs text-muted-foreground">
-              {sent ? "Thank you. We'll be in touch." : ""}
-            </p>
           </form>
         </Reveal>
       </section>

@@ -1,30 +1,33 @@
-import bottleRed from "@/assets/bottle-red.jpg";
-import bottleWhite from "@/assets/bottle-white.jpg";
-import bottleRose from "@/assets/bottle-rose.jpg";
-import bottleSparkling from "@/assets/bottle-sparkling.jpg";
-import bottleDessert from "@/assets/bottle-dessert.jpg";
+import catWine from "@/assets/cat-wine.jpg";
+import catWhisky from "@/assets/cat-whisky.jpg";
+import catVodka from "@/assets/cat-vodka.jpg";
+import catGin from "@/assets/cat-gin.jpg";
+import catCognac from "@/assets/cat-cognac.jpg";
+import catRum from "@/assets/cat-rum.jpg";
+import catBitters from "@/assets/cat-bitters.jpg";
+import catOther from "@/assets/cat-other.jpg";
+import catRose from "@/assets/cat-rose.jpg";
+import catSparkling from "@/assets/cat-sparkling.jpg";
 
 /**
- * PLACEHOLDER CATALOGUE.
- * Every field below is sample content for layout purposes only and should be
- * replaced with real inventory (a CMS or database) before launch. The shapes
- * here mirror a typical commerce product record so the swap is mechanical.
+ * MELATONIN VINTNER — Premium Drinks Collection
  *
- * NIGERIAN COLLECTION wines (suffixed `_ng`) are based on verified research
- * from Nigerian retailers (Wyn City Abuja, MyLiquorHub Lagos, NaijaLiquor,
- * Wine-Searcher Nigeria). Prices are in Nigerian Naira (₦). Tasting notes are
- * sourced from producer websites and wine publications. Fields that could
- * not be verified are left as "unknown" — never fabricated.
+ * Product catalog with 28 curated products across 8 categories.
+ * Trait descriptions provided by the brand. Prices, ABV, and detailed
+ * tasting notes are not available — left as "unknown" rather than fabricated.
  */
 
-export type WineCategory = "red" | "white" | "rose" | "sparkling" | "dessert";
+export type ProductCategory =
+  | "wine"
+  | "whisky"
+  | "vodka"
+  | "gin"
+  | "cognac"
+  | "rum"
+  | "bitters"
+  | "other";
 
-export type TasteProfile =
-  | "bold"
-  | "elegant"
-  | "celebratory"
-  | "smooth"
-  | "dinner";
+export type WineSubType = "red" | "white" | "rose" | "sparkling" | "dessert" | null;
 
 export type CurationBadge =
   | "vintners-choice"
@@ -33,88 +36,95 @@ export type CurationBadge =
   | "best-celebrations"
   | "best-dinner";
 
-export interface Wine {
+export interface Product {
   slug: string;
   name: string;
-  varietal: string;
-  winery: string;
-  region: string;
-  vintage: number;
-  category: WineCategory;
-  /** Placeholder pricing, in USD cents. */
-  priceCents: number;
+  category: ProductCategory;
+  /** For wines: red, white, rosé, sparkling. Null for spirits. */
+  wineSubType: WineSubType;
+  /** Short trait line, e.g. "Classic • Smooth • Elegant" */
+  traits: string;
+  /** Three individual trait keywords for display as tags */
+  traitTags: string[];
+  /** Brand/producer */
+  brand: string;
+  /** Category-level bottle image */
   image: string;
   imageAlt: string;
-  tastingNote: string;
-  aroma: string;
-  palate: string;
-  finish: string;
-  abv: string;
-  bottleSize: string;
-  body: "Light" | "Medium" | "Full";
-  sweetness: "Dry" | "Off-dry" | "Sweet";
-  pairings: string[];
-  profiles: TasteProfile[];
+  /** Brief description based on the brand's provided traits */
+  description: string;
+  /** Price in Naira, if known */
+  nairaPrice?: number;
   inStock: boolean;
   featured?: boolean;
-
-  /** ── Nigerian Collection fields ── */
-  /** Marks this wine as part of the Nigerian Collection. */
-  nigerianCollection?: boolean;
-  /** Price in Nigerian Naira (₦), for wines sold in the Nigerian market. */
-  nairaPrice?: number;
-  /** Curated badge for the "Best of Nigeria" experience. */
   badge?: CurationBadge;
-  /** Nigerian cuisine pairings, matched to the wine's actual profile. */
-  nigerianPairings?: string[];
-  /** Country of origin, for display on product pages. */
-  originCountry?: string;
 }
 
-export const categories: {
-  id: WineCategory;
+export interface CategoryInfo {
+  id: ProductCategory;
   label: string;
   blurb: string;
   image: string;
-}[] = [
-  {
-    id: "red",
-    label: "Red",
-    blurb: "Structure, depth and slow evenings.",
-    image: bottleRed,
-  },
-  {
-    id: "white",
-    label: "White",
-    blurb: "Precision, minerality and light.",
-    image: bottleWhite,
-  },
-  {
-    id: "rose",
-    label: "Rosé",
-    blurb: "Delicate colour, quiet confidence.",
-    image: bottleRose,
-  },
-  {
-    id: "sparkling",
-    label: "Sparkling",
-    blurb: "For the moments worth marking.",
-    image: bottleSparkling,
-  },
-  {
-    id: "dessert",
-    label: "Dessert",
-    blurb: "The last glass of the night.",
-    image: bottleDessert,
-  },
-];
+  emoji: string;
+}
 
-export const profiles: { id: TasteProfile; label: string; hint: string }[] = [
-  { id: "bold", label: "Bold & Full-Bodied", hint: "Deep tannin, long finish" },
-  { id: "elegant", label: "Light & Elegant", hint: "Fine, lifted, precise" },
-  { id: "celebratory", label: "Celebratory", hint: "Bubbles and occasion" },
-  { id: "smooth", label: "Smooth & Relaxing", hint: "Soft, rounded, easy" },
-  { id: "dinner", label: "Perfect With Dinner", hint: "Built for the table" },
+export const categories: CategoryInfo[] = [
+  {
+    id: "wine",
+    label: "Wines",
+    blurb: "Classic selections for every occasion.",
+    image: catWine,
+    emoji: "🍷",
+  },
+  {
+    id: "whisky",
+    label: "Whisky",
+    blurb: "Bold, smooth and distinctive.",
+    image: catWhisky,
+    emoji: "🥃",
+  },
+  {
+    id: "vodka",
+    label: "Vodka",
+    blurb: "Clean, crisp and versatile.",
+    image: catVodka,
+    emoji: "🍸",
+  },
+  {
+    id: "gin",
+    label: "Gin",
+    blurb: "Classic, aromatic and refreshing.",
+    image: catGin,
+    emoji: "🍹",
+  },
+  {
+    id: "cognac",
+    label: "Cognac & Brandy",
+    blurb: "Iconic, refined and sophisticated.",
+    image: catCognac,
+    emoji: "🥃",
+  },
+  {
+    id: "rum",
+    label: "Rum",
+    blurb: "Rich, smooth and distinctive.",
+    image: catRum,
+    emoji: "🍹",
+  },
+  {
+    id: "bitters",
+    label: "Bitters & Specialty",
+    blurb: "Bold, aromatic and distinctive.",
+    image: catBitters,
+    emoji: "🍾",
+  },
+  {
+    id: "other",
+    label: "Other Premium Spirits",
+    blurb: "Smooth, distinctive and classic.",
+    image: catOther,
+    emoji: "🥃",
+  },
 ];
 
 export const curationBadges: {
@@ -149,695 +159,379 @@ export const curationBadges: {
   },
 ];
 
-const imageFor: Record<WineCategory, string> = {
-  red: bottleRed,
-  white: bottleWhite,
-  rose: bottleRose,
-  sparkling: bottleSparkling,
-  dessert: bottleDessert,
+const imageForCategory: Record<ProductCategory, string> = {
+  wine: catWine,
+  whisky: catWhisky,
+  vodka: catVodka,
+  gin: catGin,
+  cognac: catCognac,
+  rum: catRum,
+  bitters: catBitters,
+  other: catOther,
 };
 
-function wine(w: Omit<Wine, "image" | "imageAlt">): Wine {
+function product(p: Omit<Product, "image" | "imageAlt">): Product {
+  const image = p.wineSubType === "rose" ? catRose
+    : p.wineSubType === "sparkling" ? catSparkling
+    : imageForCategory[p.category];
   return {
-    ...w,
-    image: imageFor[w.category],
-    imageAlt: `${w.name}, a ${w.vintage} ${w.varietal} bottle photographed against a dark background`,
+    ...p,
+    image,
+    imageAlt: `${p.name} — ${p.traits}`,
   };
 }
 
-/* ──────────────────────────────────────────────────────────────────────────
- * NIGERIAN COLLECTION
- *
- * Wines verified as available in the Nigerian market via:
- *   - Wyn City (Abuja) — wyncity.ng
- *   - MyLiquorHub (Lagos) — myliquorhub.com
- *   - NaijaLiquor — naijaliquor.com
- *   - DrinksHarbour — drinksharbour.com
- *   - LiquorEtc — liquoretc.com
- *   - Wine-Searcher Nigeria listings
- *
- * Prices in Nigerian Naira (₦) as of research date (Aug 2026).
- * Tasting notes sourced from producer websites and wine publications
- * (WineMag SA, Decanter, Vinovoss, producer pages).
- * Unverifiable fields are marked "unknown" — never fabricated.
- * ────────────────────────────────────────────────────────────────────────── */
-
-export const nigerianWines: Wine[] = [
-  /* ── REDS ── */
-  wine({
-    slug: "nederburg-winemasters-shiraz-ng",
-    name: "Nederburg The Winemasters Shiraz",
-    varietal: "Shiraz / Syrah",
-    winery: "Nederburg",
-    region: "Stellenbosch, Western Cape",
-    vintage: 2022,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 22100,
-    tastingNote:
-      "Fragrant red berries, fynbos and white pepper on the nose; medium-bodied with pure fruit and unobtrusive oak.",
-    aroma: "Red berries, fynbos, white pepper, a trace of dark chocolate.",
-    palate: "Medium-bodied, pure fruit, fine-grained tannin, supple oak.",
-    finish: "Balanced, savoury, gently persistent.",
-    abv: "14.0%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Grilled lamb", "Pepper steak", "Aged hard cheese"],
-    nigerianPairings: ["Suya (spiced grilled beef)", "Pepper soup", "Jollof rice with grilled chicken"],
-    profiles: ["bold", "dinner"],
+export const products: Product[] = [
+  /* ── WINES ── */
+  product({
+    slug: "carlo-rossi",
+    name: "Carlo Rossi",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Classic • Smooth • Elegant",
+    traitTags: ["Classic", "Smooth", "Elegant"],
+    brand: "Carlo Rossi",
+    description: "A classic choice known for its smooth, approachable character. Elegant enough for the table, easy enough for any evening.",
     inStock: true,
     featured: true,
-    nigerianCollection: true,
     badge: "vintners-choice",
-    originCountry: "South Africa",
   }),
-  wine({
-    slug: "nederburg-pinotage-ng",
-    name: "Nederburg Pinotage",
-    varietal: "Pinotage",
-    winery: "Nederburg",
-    region: "Western Cape",
-    vintage: 2022,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 22000,
-    tastingNote:
-      "Bold and elegant, showcasing South Africa's signature grape with ripe plum, dark fruit and a mocha undertone.",
-    aroma: "Ripe plum, blackberry, mocha, red cherry.",
-    palate: "Full-bodied, rounded tannin, dark fruit with a smoky edge.",
-    finish: "Warm, fruit-forward, moderate length.",
-    abv: "14.0%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Grilled meats", "Barbecue", "Stewed beef"],
-    nigerianPairings: ["Suya", "Asaro (yam porridge)", "Grilled goat meat"],
-    profiles: ["bold", "dinner"],
-    inStock: true,
-    nigerianCollection: true,
-    badge: "best-dinner",
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "kanonkop-kadette-pinotage-ng",
-    name: "Kanonkop Kadette Pinotage",
-    varietal: "Pinotage",
-    winery: "Kanonkop Wine Estate",
-    region: "Stellenbosch, Western Cape",
-    vintage: 2023,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 14700,
-    tastingNote:
-      "Classic Pinotage character with ripe plum, cherry, and hints of mocha — bold yet silky.",
-    aroma: "Ripe plum, cherry, cinnamon, nutmeg, mocha.",
-    palate: "Juicy dark fruit, savoury depth, graceful tannins, nuanced oak.",
-    finish: "Smooth, fruit-led, balanced.",
-    abv: "13.5%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Beef burger", "Braised dishes", "Charcuterie"],
-    nigerianPairings: ["Suya", "Grilled chicken", "Beef stew"],
-    profiles: ["bold", "smooth"],
-    inStock: true,
-    nigerianCollection: true,
-    badge: "editors-pick",
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "cederberg-shiraz-ng",
-    name: "Cederberg Shiraz",
-    varietal: "Shiraz / Syrah",
-    winery: "Cederberg Private Cellar",
-    region: "Cederberg, Western Cape",
-    vintage: 2020,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 45900,
-    tastingNote:
-      "Complex and intense — red fruit, mulberry and cherry with 15 months in oak, sweet spice and vanilla.",
-    aroma: "Red fruit, mulberry, cherry, cracked black pepper, smoked meat.",
-    palate: "Rich and full, layered dark fruit, elegant oak integration.",
-    finish: "Smooth, lingering, well-balanced.",
-    abv: "14.5%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Aged steak", "Game meats", "Slow-roasted lamb"],
-    nigerianPairings: ["Peppered goat meat", "Grilled beef", "Spicy jollof"],
-    profiles: ["bold", "dinner"],
+  product({
+    slug: "four-cousins",
+    name: "Four Cousins",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Fruity • Smooth • Refreshing",
+    traitTags: ["Fruity", "Smooth", "Refreshing"],
+    brand: "Van Loveren",
+    description: "Fruity and refreshing with a smooth finish. A popular favourite that's easy to enjoy and easy to share.",
     inStock: true,
     featured: true,
-    nigerianCollection: true,
-    badge: "premium-selection",
-    originCountry: "South Africa",
   }),
-  wine({
-    slug: "the-chocolate-block-ng",
-    name: "The Chocolate Block",
-    varietal: "Syrah-led Rhône-style Blend",
-    winery: "Boekenhoutskloof",
-    region: "Swartland, Western Cape",
-    vintage: 2022,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 39800,
-    tastingNote:
-      "Intense and fragrant — chocolate, mocha, ripe black and blueberry fruit with black olive and perfume.",
-    aroma: "Blackberry, blueberry, black olive, dark chocolate, mocha.",
-    palate: "Full-bodied, concentrated, fine-grained tannin, layered fruit.",
-    finish: "Long, rich, structured.",
-    abv: "14.5%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Dry-aged beef", "Venison", "Dark chocolate"],
-    nigerianPairings: ["Spicy grilled meats", "Pepper soup with goat meat", "Jollof rice"],
-    profiles: ["bold", "dinner"],
+  product({
+    slug: "andre-rose",
+    name: "André Rosé",
+    category: "wine",
+    wineSubType: "rose",
+    traits: "Delicate • Fruity • Rosé Wine",
+    traitTags: ["Delicate", "Fruity", "Rosé"],
+    brand: "André",
+    description: "A delicate rosé with fruity character. Light, fresh and perfect for warm evenings and celebrations.",
+    inStock: true,
+  }),
+  product({
+    slug: "4th-street",
+    name: "4th Street",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Smooth • Fruity • Easy-Drinking",
+    traitTags: ["Smooth", "Fruity", "Easy-Drinking"],
+    brand: "4th Street",
+    description: "Smooth, fruity and easy-drinking. An accessible wine that doesn't demand attention but rewards it.",
+    inStock: true,
+  }),
+  product({
+    slug: "cape-more",
+    name: "Cape More",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Rich • Smooth • Refined",
+    traitTags: ["Rich", "Smooth", "Refined"],
+    brand: "Cape More",
+    description: "Rich and refined with a smooth profile. A step up for those who appreciate depth without complexity.",
+    inStock: true,
+  }),
+  product({
+    slug: "mixed-southern-snow",
+    name: "Mixed Southern Snow",
+    category: "wine",
+    wineSubType: "white",
+    traits: "Fruity • Refreshing • Smooth",
+    traitTags: ["Fruity", "Refreshing", "Smooth"],
+    brand: "Mixed Southern",
+    description: "Fruity and refreshing with a smooth finish. A cool, easy white for casual premium moments.",
+    inStock: true,
+  }),
+  product({
+    slug: "toma",
+    name: "Toma",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Elegant • Smooth • Enjoyable",
+    traitTags: ["Elegant", "Smooth", "Enjoyable"],
+    brand: "Toma",
+    description: "Elegant and smooth with broad appeal. A wine that's simply enjoyable — no ceremony required.",
+    inStock: true,
+  }),
+  product({
+    slug: "four-cousins-sparkling",
+    name: "Four Cousins Sparkling",
+    category: "wine",
+    wineSubType: "sparkling",
+    traits: "Celebratory • Crisp • Refreshing",
+    traitTags: ["Celebratory", "Crisp", "Refreshing"],
+    brand: "Van Loveren",
+    description: "Crisp and refreshing with a celebratory spirit. For the moments worth marking with a pop.",
     inStock: true,
     featured: true,
-    nigerianCollection: true,
-    badge: "premium-selection",
-    originCountry: "South Africa",
+    badge: "best-celebrations",
   }),
-  wine({
-    slug: "swartland-merlot-ng",
-    name: "Swartland Merlot",
-    varietal: "Merlot",
-    winery: "Swartland Winery",
-    region: "Swartland, Western Cape",
-    vintage: 2021,
-    category: "red",
-    priceCents: 0,
-    nairaPrice: 15800,
-    tastingNote:
-      "Soft plum and red berry fruit with a gentle, rounded palate — approachable and generous.",
-    aroma: "Plum, red cherry, subtle herb.",
-    palate: "Soft and rounded, plush fruit, gentle tannin.",
-    finish: "Smooth, easy, moderate.",
-    abv: "13.5%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Roast chicken", "Pasta", "Charcuterie"],
-    nigerianPairings: ["Jollof rice", "Fried plantain", "Grilled chicken"],
-    profiles: ["smooth"],
+  product({
+    slug: "dominio-rose",
+    name: "Dominio Rosé",
+    category: "wine",
+    wineSubType: "rose",
+    traits: "Delicate • Fruity • Rosé Wine",
+    traitTags: ["Delicate", "Fruity", "Rosé"],
+    brand: "Dominio",
+    description: "A delicate rosé with a fruity, easy character. Light on the palate, generous in the glass.",
     inStock: true,
-    nigerianCollection: true,
-    originCountry: "South Africa",
+  }),
+  product({
+    slug: "cape-discovery",
+    name: "Cape Discovery",
+    category: "wine",
+    wineSubType: "red",
+    traits: "Smooth • Fruity • Approachable",
+    traitTags: ["Smooth", "Fruity", "Approachable"],
+    brand: "Cape Discovery",
+    description: "Smooth and approachable with a fruity profile. A welcoming wine for any table.",
+    inStock: true,
   }),
 
-  /* ── WHITES ── */
-  wine({
-    slug: "cederberg-sauvignon-blanc-ng",
-    name: "Cederberg Sauvignon Blanc",
-    varietal: "Sauvignon Blanc",
-    winery: "Cederberg Private Cellar",
-    region: "Cederberg, Western Cape",
-    vintage: 2021,
-    category: "white",
-    priceCents: 0,
-    nairaPrice: 34000,
-    tastingNote:
-      "Crisp and concentrated — gooseberry, citrus and a fine mineral edge from high-altitude vineyards.",
-    aroma: "Gooseberry, lime, green fig, flint.",
-    palate: "Taut and vivid, bright acidity, mineral core.",
-    finish: "Clean, precise, persistent.",
-    abv: "13.5%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Oysters", "Goat cheese", "Grilled fish"],
-    nigerianPairings: ["Grilled tilapia", "Pepper soup (fish)", "Fresh salad"],
-    profiles: ["elegant", "dinner"],
+  /* ── WHISKY ── */
+  product({
+    slug: "8pm-whisky",
+    name: "8 PM Whisky",
+    category: "whisky",
+    wineSubType: null,
+    traits: "Bold • Smooth • Distinctive",
+    traitTags: ["Bold", "Smooth", "Distinctive"],
+    brand: "8 PM",
+    description: "Bold and distinctive with a smooth finish. A whisky that makes its presence known without demanding experience.",
     inStock: true,
     featured: true,
-    nigerianCollection: true,
-    badge: "premium-selection",
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "cederberg-chenin-blanc-5gen-ng",
-    name: "Cederberg 5 Generations Chenin Blanc",
-    varietal: "Chenin Blanc",
-    winery: "Cederberg Private Cellar",
-    region: "Cederberg, Western Cape",
-    vintage: 2021,
-    category: "white",
-    priceCents: 0,
-    nairaPrice: 56300,
-    tastingNote:
-      "Reserve-level Chenin Blanc — rich texture, baked apple, honey and a long, structured finish.",
-    aroma: "Baked apple, honey, almond, white blossom.",
-    palate: "Full and textured, layered fruit, fine acidity holding weight.",
-    finish: "Long, complex, refined.",
-    abv: "13.5%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Scallops", "Roast pork", "Aged comté"],
-    nigerianPairings: ["Grilled prawns", "Coconut rice", "Fisherman's okra"],
-    profiles: ["elegant", "dinner"],
-    inStock: true,
-    nigerianCollection: true,
-    badge: "premium-selection",
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "swartland-sauvignon-blanc-ng",
-    name: "Swartland Sauvignon Blanc",
-    varietal: "Sauvignon Blanc",
-    winery: "Swartland Winery",
-    region: "Swartland, Western Cape",
-    vintage: 2022,
-    category: "white",
-    priceCents: 0,
-    nairaPrice: 15800,
-    tastingNote:
-      "Fresh and zesty — tropical fruit and cut grass with a clean, refreshing finish.",
-    aroma: "Tropical fruit, gooseberry, fresh-cut grass.",
-    palate: "Crisp, lively, well-defined fruit.",
-    finish: "Clean and refreshing.",
-    abv: "12.5%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Dry",
-    pairings: ["Salad", "Seafood", "Goat cheese"],
-    nigerianPairings: ["Pepper soup (fish)", "Grilled tilapia", "Fresh salad"],
-    profiles: ["elegant"],
-    inStock: true,
-    nigerianCollection: true,
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "swartland-chardonnay-ng",
-    name: "Swartland Chardonnay",
-    varietal: "Chardonnay",
-    winery: "Swartland Winery",
-    region: "Swartland, Western Cape",
-    vintage: 2022,
-    category: "white",
-    priceCents: 0,
-    nairaPrice: 15800,
-    tastingNote:
-      "Orchard fruit and gentle oak — a soft, approachable Chardonnay with balanced acidity.",
-    aroma: "White peach, citrus, subtle oak.",
-    palate: "Soft and rounded, gentle fruit, light oak touch.",
-    finish: "Smooth, clean.",
-    abv: "13.0%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Roast chicken", "Scallops", "Soft cheese"],
-    nigerianPairings: ["Grilled chicken", "Jollof rice (white)", "Coconut rice"],
-    profiles: ["smooth", "dinner"],
-    inStock: true,
-    nigerianCollection: true,
-    originCountry: "South Africa",
-  }),
-  wine({
-    slug: "ghost-corner-semillon-ng",
-    name: "Ghost Corner Semillon",
-    varietal: "Sémillon",
-    winery: "Lomond Wine Estate",
-    region: "Cape South Coast, Western Cape",
-    vintage: 2020,
-    category: "white",
-    priceCents: 0,
-    nairaPrice: 26300,
-    tastingNote:
-      "Textured and layered — waxy citrus, dried herbs and a rich, generous palate.",
-    aroma: "Lemon wax, dried herbs, white peach.",
-    palate: "Full and waxy, textured, fine acid balance.",
-    finish: "Long, complex, generous.",
-    abv: "13.5%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["White fish in butter", "Roast pork", "Soft cheese"],
-    nigerianPairings: ["Grilled prawns", "Fisherman's okra", "Coconut rice"],
-    profiles: ["elegant", "dinner"],
-    inStock: true,
-    nigerianCollection: true,
     badge: "editors-pick",
-    originCountry: "South Africa",
+  }),
+  product({
+    slug: "zenith-whisky-honey",
+    name: "Zenith Whisky & Honey",
+    category: "whisky",
+    wineSubType: null,
+    traits: "Rich • Smooth • Honeyed",
+    traitTags: ["Rich", "Smooth", "Honeyed"],
+    brand: "Zenith",
+    description: "Rich and smooth with a honeyed warmth. A whisky that leans into comfort — rounded, sweet, generous.",
+    inStock: true,
+  }),
+  product({
+    slug: "black-velvet",
+    name: "Black Velvet",
+    category: "whisky",
+    wineSubType: null,
+    traits: "Smooth • Full-Bodied • Classic",
+    traitTags: ["Smooth", "Full-Bodied", "Classic"],
+    brand: "Black Velvet",
+    description: "A classic Canadian whisky — smooth and full-bodied with a timeless profile.",
+    inStock: true,
   }),
 
-  /* ── ROSÉ ── */
-  wine({
-    slug: "four-cousins-sweet-rose-ng",
-    name: "Four Cousins Sweet Rosé",
-    varietal: "Natural Sweet Rosé",
-    winery: "Van Loveren",
-    region: "Robertson, Western Cape",
-    vintage: 2023,
-    category: "rose",
-    priceCents: 0,
-    nairaPrice: 8300,
-    tastingNote:
-      "Fresh and easy — strawberry and candy fruit with a soft, off-dry finish.",
-    aroma: "Strawberry, raspberry, candy fruit.",
-    palate: "Soft, light, gently sweet, approachable.",
-    finish: "Clean, easy, off-dry.",
-    abv: "9.0%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Off-dry",
-    pairings: ["Summer salads", "Light picnics", "Fresh fruit"],
-    nigerianPairings: ["Small chops", "Fried plantain", "Fruit platters"],
-    profiles: ["smooth"],
+  /* ── VODKA ── */
+  product({
+    slug: "smirnoff-premium",
+    name: "Smirnoff Premium",
+    category: "vodka",
+    wineSubType: null,
+    traits: "Clean • Crisp • Versatile",
+    traitTags: ["Clean", "Crisp", "Versatile"],
+    brand: "Smirnoff",
+    description: "Clean, crisp and endlessly versatile. The reliable choice for cocktails and mixed drinks.",
     inStock: true,
-    nigerianCollection: true,
-    originCountry: "South Africa",
+    featured: true,
   }),
-  wine({
-    slug: "sweet-kiss-rose-ng",
-    name: "Sweet Kiss Natural Sweet Rosé",
-    varietal: "Natural Sweet Rosé",
-    winery: "Sweet Kiss",
-    region: "Western Cape",
-    vintage: 2023,
-    category: "rose",
-    priceCents: 0,
-    nairaPrice: 6800,
-    tastingNote:
-      "Delicate and bright — soft red berry fruit with a light, easy-drinking character.",
-    aroma: "Red berry, watermelon, floral hint.",
-    palate: "Light, soft, gently sweet, refreshing.",
-    finish: "Short, clean, easy.",
-    abv: "8.5%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Off-dry",
-    pairings: ["Light snacks", "Salads", "Desserts"],
-    nigerianPairings: ["Small chops", "Puff puff", "Fruit platters"],
-    profiles: ["smooth"],
+  product({
+    slug: "ciroc",
+    name: "Cîroc",
+    category: "vodka",
+    wineSubType: null,
+    traits: "Refined • Smooth • Premium",
+    traitTags: ["Refined", "Smooth", "Premium"],
+    brand: "Cîroc",
+    description: "Refined and premium with a smooth, grape-derived character. A vodka that stands on its own.",
     inStock: true,
-    nigerianCollection: true,
-    originCountry: "South Africa",
+    featured: true,
+    badge: "premium-selection",
   }),
 
-  /* ── DESSERT ── */
-  wine({
-    slug: "nederburg-noble-late-harvest-ng",
-    name: "Nederburg Noble Late Harvest",
-    varietal: "Noble Late Harvest",
-    winery: "Nederburg",
-    region: "Western Cape",
-    vintage: 2019,
-    category: "dessert",
-    priceCents: 0,
-    nairaPrice: 10700,
-    tastingNote:
-      "Luscious and golden — apricot, honey and orange blossom with bright acidity cutting the sweetness.",
-    aroma: "Dried apricot, honey, orange blossom, marmalade.",
-    palate: "Unctuous but lifted, sweet fruit balanced by fine acidity.",
-    finish: "Long, luminous, never cloying.",
-    abv: "10.5%",
-    bottleSize: "375 ml",
-    body: "Full",
-    sweetness: "Sweet",
-    pairings: ["Blue cheese", "Tarte tatin", "Crème brûlée"],
-    nigerianPairings: ["Puff puff", "Coconut cake", "Plantain fritters"],
-    profiles: ["smooth"],
+  /* ── GIN ── */
+  product({
+    slug: "lords-gin",
+    name: "Lords Gin",
+    category: "gin",
+    wineSubType: null,
+    traits: "Classic • Aromatic • Smooth",
+    traitTags: ["Classic", "Aromatic", "Smooth"],
+    brand: "Lords",
+    description: "Classic and aromatic with a smooth finish. A gin that plays well with tonic, or stands alone.",
     inStock: true,
-    nigerianCollection: true,
+  }),
+  product({
+    slug: "british-soldier",
+    name: "British Soldier",
+    category: "gin",
+    wineSubType: null,
+    traits: "Bold • Refreshing • Distinctive",
+    traitTags: ["Bold", "Refreshing", "Distinctive"],
+    brand: "British Soldier",
+    description: "Bold and distinctive with a refreshing edge. A gin with personality — not for the cautious.",
+    inStock: true,
+  }),
+  product({
+    slug: "squadron-premium",
+    name: "Squadron Premium Size",
+    category: "gin",
+    wineSubType: null,
+    traits: "Smooth • Classic • Full-Bodied",
+    traitTags: ["Smooth", "Classic", "Full-Bodied"],
+    brand: "Squadron",
+    description: "Smooth and full-bodied with a classic gin profile. Generous in size, generous in character.",
+    inStock: true,
+  }),
+
+  /* ── COGNAC & BRANDY ── */
+  product({
+    slug: "monnet",
+    name: "Monnet",
+    category: "cognac",
+    wineSubType: null,
+    traits: "Refined • Smooth • Elegant",
+    traitTags: ["Refined", "Smooth", "Elegant"],
+    brand: "Monnet",
+    description: "Refined and elegant with a smooth delivery. A cognac for quiet appreciation.",
+    inStock: true,
+  }),
+  product({
+    slug: "martell",
+    name: "Martell",
+    category: "cognac",
+    wineSubType: null,
+    traits: "Rich • Sophisticated • Classic",
+    traitTags: ["Rich", "Sophisticated", "Classic"],
+    brand: "Martell",
+    description: "Rich and sophisticated — one of the great cognac houses. Classic for a reason.",
+    inStock: true,
+    featured: true,
+    badge: "premium-selection",
+  }),
+  product({
+    slug: "hennessy",
+    name: "Hennessy",
+    category: "cognac",
+    wineSubType: null,
+    traits: "Iconic • Refined • Full-Bodied",
+    traitTags: ["Iconic", "Refined", "Full-Bodied"],
+    brand: "Hennessy",
+    description: "Iconic and refined with a full-bodied presence. The cognac that defines the category.",
+    inStock: true,
+    featured: true,
+    badge: "vintners-choice",
+  }),
+  product({
+    slug: "remy-martin",
+    name: "Rémy Martin",
+    category: "cognac",
+    wineSubType: null,
+    traits: "Elegant • Rich • Distinctive",
+    traitTags: ["Elegant", "Rich", "Distinctive"],
+    brand: "Rémy Martin",
+    description: "Elegant and rich with a distinctive character. A cognac of standing and tradition.",
+    inStock: true,
+  }),
+  product({
+    slug: "garret",
+    name: "Garret",
+    category: "cognac",
+    wineSubType: null,
+    traits: "Smooth • Classic • Enjoyable",
+    traitTags: ["Smooth", "Classic", "Enjoyable"],
+    brand: "Garret",
+    description: "Smooth and classic with an enjoyable, approachable profile. A brandy for everyday refinement.",
+    inStock: true,
+  }),
+
+  /* ── RUM ── */
+  product({
+    slug: "old-captain",
+    name: "Old Captain",
+    category: "rum",
+    wineSubType: null,
+    traits: "Rich • Smooth • Distinctive",
+    traitTags: ["Rich", "Smooth", "Distinctive"],
+    brand: "Old Captain",
+    description: "Rich and smooth with a distinctive character. A rum with depth and warmth.",
+    inStock: true,
+  }),
+
+  /* ── BITTERS & SPECIALTY ── */
+  product({
+    slug: "origin-premium",
+    name: "Origin Premium Size",
+    category: "bitters",
+    wineSubType: null,
+    traits: "Bold • Distinctive • Full-Bodied",
+    traitTags: ["Bold", "Distinctive", "Full-Bodied"],
+    brand: "Origin",
+    description: "Bold and full-bodied with a distinctive profile. A specialty spirit for those who know.",
+    inStock: true,
+  }),
+  product({
+    slug: "action-bitters",
+    name: "Action Bitters",
+    category: "bitters",
+    wineSubType: null,
+    traits: "Aromatic • Bold • Refreshing",
+    traitTags: ["Aromatic", "Bold", "Refreshing"],
+    brand: "Action",
+    description: "Aromatic and bold with a refreshing edge. A bitters that brings character to any mix.",
+    inStock: true,
+  }),
+
+  /* ── OTHER PREMIUM SPIRITS ── */
+  product({
+    slug: "good-fathers",
+    name: "Good Fathers",
+    category: "other",
+    wineSubType: null,
+    traits: "Smooth • Distinctive • Classic",
+    traitTags: ["Smooth", "Distinctive", "Classic"],
+    brand: "Good Fathers",
+    description: "Smooth and distinctive with a classic profile. A premium spirit that earns its place.",
+    inStock: true,
+  }),
+  product({
+    slug: "buen-amigo",
+    name: "Buen Amigo",
+    category: "other",
+    wineSubType: null,
+    traits: "Bold • Vibrant • Agave Spirit",
+    traitTags: ["Bold", "Vibrant", "Agave Spirit"],
+    brand: "Buen Amigo",
+    description: "Bold and vibrant — an agave spirit with energy. For the moments that call for something different.",
+    inStock: true,
     badge: "editors-pick",
-    originCountry: "South Africa",
   }),
 ];
 
-/* ── EXISTING PLACEHOLDER CATALOGUE ── */
+/* ── Helpers ── */
 
-export const wines: Wine[] = [
-  wine({
-    slug: "nocturne-cabernet-sauvignon",
-    name: "Nocturne",
-    varietal: "Cabernet Sauvignon",
-    winery: "Placeholder Estate I",
-    region: "Placeholder Region, Country",
-    vintage: 2019,
-    category: "red",
-    priceCents: 14500,
-    tastingNote: "Cassis, graphite and cedar over a long, quiet finish.",
-    aroma: "Blackcurrant, violet, pencil shaving, a trace of cigar box.",
-    palate: "Dense and composed, with fine-grained tannin and dark fruit.",
-    finish: "Long, savoury, slowly resolving.",
-    abv: "14.5%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Dry-aged beef", "Aged hard cheese", "Wild mushroom"],
-    profiles: ["bold", "dinner"],
-    inStock: true,
-    featured: true,
-  }),
-  wine({
-    slug: "veil-pinot-noir",
-    name: "Veil",
-    varietal: "Pinot Noir",
-    winery: "Placeholder Estate II",
-    region: "Placeholder Region, Country",
-    vintage: 2021,
-    category: "red",
-    priceCents: 11800,
-    tastingNote: "Red cherry and forest floor, silk-textured and restrained.",
-    aroma: "Sour cherry, rose petal, damp earth.",
-    palate: "Translucent and fine, with bright acidity carrying the fruit.",
-    finish: "Clean, perfumed, gently persistent.",
-    abv: "13.0%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Dry",
-    pairings: ["Duck breast", "Salmon", "Truffle risotto"],
-    profiles: ["elegant", "smooth", "dinner"],
-    inStock: true,
-    featured: true,
-  }),
-  wine({
-    slug: "ember-malbec",
-    name: "Ember",
-    varietal: "Malbec",
-    winery: "Placeholder Estate III",
-    region: "Placeholder Region, Country",
-    vintage: 2020,
-    category: "red",
-    priceCents: 8900,
-    tastingNote: "Plum, cocoa and warm spice with a velvet centre.",
-    aroma: "Black plum, mocha, sweet baking spice.",
-    palate: "Generous and rounded, plush without weight.",
-    finish: "Warm and lingering.",
-    abv: "14.0%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Grilled lamb", "Charcuterie", "Dark chocolate"],
-    profiles: ["bold", "smooth"],
-    inStock: true,
-  }),
-  wine({
-    slug: "obsidian-syrah",
-    name: "Obsidian",
-    varietal: "Shiraz / Syrah",
-    winery: "Placeholder Estate IV",
-    region: "Placeholder Region, Country",
-    vintage: 2018,
-    category: "red",
-    priceCents: 16200,
-    tastingNote: "Black pepper, olive and blackberry — brooding and complete.",
-    aroma: "Blackberry, cracked pepper, smoked herb.",
-    palate: "Muscular and dark, framed by firm tannin.",
-    finish: "Smoky and long.",
-    abv: "14.8%",
-    bottleSize: "750 ml",
-    body: "Full",
-    sweetness: "Dry",
-    pairings: ["Peppered steak", "Braised short rib", "Blue cheese"],
-    profiles: ["bold", "dinner"],
-    inStock: false,
-  }),
-  wine({
-    slug: "lumen-chardonnay",
-    name: "Lumen",
-    varietal: "Chardonnay",
-    winery: "Placeholder Estate V",
-    region: "Placeholder Region, Country",
-    vintage: 2022,
-    category: "white",
-    priceCents: 10400,
-    tastingNote: "Orchard fruit and struck flint, held in a fine line of acid.",
-    aroma: "White peach, hazelnut, citrus blossom.",
-    palate: "Textured and taut, with a saline undertow.",
-    finish: "Mineral and precise.",
-    abv: "13.0%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Roast chicken", "Scallops", "Soft cheese"],
-    profiles: ["elegant", "dinner"],
-    inStock: true,
-    featured: true,
-  }),
-  wine({
-    slug: "meridian-sauvignon-blanc",
-    name: "Meridian",
-    varietal: "Sauvignon Blanc",
-    winery: "Placeholder Estate VI",
-    region: "Placeholder Region, Country",
-    vintage: 2023,
-    category: "white",
-    priceCents: 7600,
-    tastingNote: "Grapefruit, cut grass and a cool stone edge.",
-    aroma: "Lime zest, elderflower, gooseberry.",
-    palate: "Crisp and vivid, tightly drawn.",
-    finish: "Sharp, refreshing, short and clean.",
-    abv: "12.5%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Dry",
-    pairings: ["Oysters", "Goat cheese", "Green salad"],
-    profiles: ["elegant"],
-    inStock: true,
-  }),
-  wine({
-    slug: "still-hour-riesling",
-    name: "Still Hour",
-    varietal: "Riesling",
-    winery: "Placeholder Estate VII",
-    region: "Placeholder Region, Country",
-    vintage: 2021,
-    category: "white",
-    priceCents: 9200,
-    tastingNote: "Lime, jasmine and wet slate with a whisper of sweetness.",
-    aroma: "Lime leaf, white flower, petrol note.",
-    palate: "Off-dry and weightless, acid holding everything upright.",
-    finish: "Long and cooling.",
-    abv: "11.5%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Off-dry",
-    pairings: ["Spiced dishes", "Pork belly", "Shellfish"],
-    profiles: ["elegant", "smooth"],
-    inStock: true,
-  }),
-  wine({
-    slug: "dusk-rose",
-    name: "Dusk",
-    varietal: "Provence-style Rosé",
-    winery: "Placeholder Estate VIII",
-    region: "Placeholder Region, Country",
-    vintage: 2023,
-    category: "rose",
-    priceCents: 8200,
-    tastingNote: "Wild strawberry and citrus pith, pale as early evening.",
-    aroma: "Strawberry, pink grapefruit, herb garden.",
-    palate: "Dry and quiet, with a fine chalky texture.",
-    finish: "Delicate and clean.",
-    abv: "12.5%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Dry",
-    pairings: ["Summer vegetables", "Grilled prawns", "Soft herbs"],
-    profiles: ["elegant", "smooth"],
-    inStock: true,
-  }),
-  wine({
-    slug: "aurora-champagne",
-    name: "Aurora",
-    varietal: "Champagne, Brut",
-    winery: "Placeholder Maison I",
-    region: "Placeholder Region, Country",
-    vintage: 2017,
-    category: "sparkling",
-    priceCents: 21500,
-    tastingNote: "Brioche, green apple and a fine, insistent bead.",
-    aroma: "Toasted bread, orchard fruit, almond.",
-    palate: "Creamy mousse over a taut, chalky core.",
-    finish: "Bright, saline, extended.",
-    abv: "12.0%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Caviar", "Fried chicken", "Aged comté"],
-    profiles: ["celebratory", "elegant"],
-    inStock: true,
-    featured: true,
-  }),
-  wine({
-    slug: "cadence-prosecco",
-    name: "Cadence",
-    varietal: "Prosecco Superiore",
-    winery: "Placeholder Maison II",
-    region: "Placeholder Region, Country",
-    vintage: 2023,
-    category: "sparkling",
-    priceCents: 5400,
-    tastingNote: "Pear, white blossom and an easy, bright lift.",
-    aroma: "Pear, acacia, green apple.",
-    palate: "Light and frothy, gently fruited.",
-    finish: "Crisp and short.",
-    abv: "11.0%",
-    bottleSize: "750 ml",
-    body: "Light",
-    sweetness: "Off-dry",
-    pairings: ["Aperitivo", "Prosciutto", "Fresh fruit"],
-    profiles: ["celebratory", "smooth"],
-    inStock: true,
-  }),
-  wine({
-    slug: "sable-cava",
-    name: "Sable",
-    varietal: "Cava Reserva",
-    winery: "Placeholder Maison III",
-    region: "Placeholder Region, Country",
-    vintage: 2020,
-    category: "sparkling",
-    priceCents: 6800,
-    tastingNote: "Lemon curd and toasted nut, dry and confident.",
-    aroma: "Lemon, hazelnut, sea air.",
-    palate: "Firm bubbles, savoury depth.",
-    finish: "Dry and nutty.",
-    abv: "11.5%",
-    bottleSize: "750 ml",
-    body: "Medium",
-    sweetness: "Dry",
-    pairings: ["Tapas", "Almonds", "Cured fish"],
-    profiles: ["celebratory", "dinner"],
-    inStock: true,
-  }),
-  wine({
-    slug: "late-light-dessert",
-    name: "Late Light",
-    varietal: "Late Harvest Sémillon",
-    winery: "Placeholder Estate IX",
-    region: "Placeholder Region, Country",
-    vintage: 2016,
-    category: "dessert",
-    priceCents: 12900,
-    tastingNote: "Apricot, honey and candied peel, cut by bright acidity.",
-    aroma: "Dried apricot, orange marmalade, beeswax.",
-    palate: "Unctuous but lifted, never cloying.",
-    finish: "Sweet, luminous, very long.",
-    abv: "13.5%",
-    bottleSize: "375 ml",
-    body: "Full",
-    sweetness: "Sweet",
-    pairings: ["Blue cheese", "Tarte tatin", "Foie gras"],
-    profiles: ["smooth"],
-    inStock: true,
-  }),
-  /* ── Nigerian Collection wines appended ── */
-  ...nigerianWines,
-];
+export const categoryLabel = (id: ProductCategory) =>
+  categories.find((c) => c.id === id)?.label ?? id;
 
-export const formatPrice = (cents: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-  }).format(cents / 100);
+export const badgeLabel = (id: CurationBadge) =>
+  curationBadges.find((c) => c.id === id)?.label ?? id;
+
+export const getProduct = (slug: string) =>
+  products.find((p) => p.slug === slug);
 
 export const formatNaira = (naira: number) =>
   new Intl.NumberFormat("en-NG", {
@@ -846,12 +540,14 @@ export const formatNaira = (naira: number) =>
     maximumFractionDigits: 0,
   }).format(naira);
 
-export const getWine = (slug: string) => wines.find((w) => w.slug === slug);
+/* Keep these for backward compatibility with cart */
+export const formatPrice = (cents: number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+  }).format(cents / 100);
 
-export const categoryLabel = (id: WineCategory) =>
-  categories.find((c) => c.id === id)?.label ?? id;
-
-export const badgeLabel = (id: CurationBadge) =>
-  curationBadges.find((c) => c.id === id)?.label ?? id;
-
-export const getNigerianWines = () => wines.filter((w) => w.nigerianCollection);
+export type Wine = Product;
+export const wines = products;
+export const getWine = getProduct;

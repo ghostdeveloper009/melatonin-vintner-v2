@@ -1,14 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/collection", label: "Our Collection" },
-  { to: "/nigeria", label: "Nigeria, Uncorked" },
+  { to: "/collection", label: "Collection" },
   { to: "/about", label: "About" },
-  { to: "/guide", label: "Wine Guide" },
+  { to: "/guide", label: "Drink Guide" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -73,20 +72,6 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <Link
-            to="/collection"
-            aria-label="Search the collection"
-            className="hidden text-muted-foreground transition-colors hover:text-foreground sm:block"
-          >
-            <Search className="h-[1.05rem] w-[1.05rem]" />
-          </Link>
-          <Link
-            to="/contact"
-            aria-label="Account"
-            className="hidden text-muted-foreground transition-colors hover:text-foreground sm:block"
-          >
-            <User className="h-[1.05rem] w-[1.05rem]" />
-          </Link>
           <button
             onClick={() => setOpen(true)}
             aria-label={`Open selection, ${count} items`}
@@ -131,7 +116,7 @@ export function Nav() {
             ))}
           </ul>
           <p className="mt-16 text-[0.65rem] tracking-[0.24em] text-muted-foreground uppercase">
-            Please enjoy responsibly
+            Pour better. Live better.
           </p>
         </nav>
       </div>

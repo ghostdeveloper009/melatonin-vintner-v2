@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GuideRouteImport } from './routes/guide'
-import { Route as NigeriaRouteImport } from './routes/nigeria'
 import { Route as CollectionIndexRouteImport } from './routes/collection.index'
 import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 
@@ -37,11 +36,6 @@ const GuideRoute = GuideRouteImport.update({
   path: '/guide',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NigeriaRoute = NigeriaRouteImport.update({
-  id: '/nigeria',
-  path: '/nigeria',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CollectionIndexRoute = CollectionIndexRouteImport.update({
   id: '/collection/',
   path: '/collection/',
@@ -58,7 +52,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/guide': typeof GuideRoute
-  '/nigeria': typeof NigeriaRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection/': typeof CollectionIndexRoute
 }
@@ -67,7 +60,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/guide': typeof GuideRoute
-  '/nigeria': typeof NigeriaRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection': typeof CollectionIndexRoute
 }
@@ -77,7 +69,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/guide': typeof GuideRoute
-  '/nigeria': typeof NigeriaRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection/': typeof CollectionIndexRoute
 }
@@ -88,25 +79,17 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/guide'
-    | '/nigeria'
     | '/collection/$slug'
     | '/collection/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/guide'
-    | '/nigeria'
-    | '/collection/$slug'
-    | '/collection'
+    '/' | '/about' | '/contact' | '/guide' | '/collection/$slug' | '/collection'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/guide'
-    | '/nigeria'
     | '/collection/$slug'
     | '/collection/'
   fileRoutesById: FileRoutesById
@@ -116,7 +99,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   GuideRoute: typeof GuideRoute
-  NigeriaRoute: typeof NigeriaRoute
   CollectionSlugRoute: typeof CollectionSlugRoute
   CollectionIndexRoute: typeof CollectionIndexRoute
 }
@@ -151,13 +133,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuideRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/nigeria': {
-      id: '/nigeria'
-      path: '/nigeria'
-      fullPath: '/nigeria'
-      preLoaderRoute: typeof NigeriaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/collection/': {
       id: '/collection/'
       path: '/collection'
@@ -180,7 +155,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   GuideRoute: GuideRoute,
-  NigeriaRoute: NigeriaRoute,
   CollectionSlugRoute: CollectionSlugRoute,
   CollectionIndexRoute: CollectionIndexRoute,
 }
