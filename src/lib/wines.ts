@@ -19,29 +19,31 @@ import eightPmWhisky1 from "@/assets/products/8pm-whisky-1.jpg";
 import zenithWhiskyHoney1 from "@/assets/products/zenith-whisky-honey-1.jpg";
 import blackVelvet1 from "@/assets/products/black-velvet-1.jpg";
 
+/* ── Real product images from retail sources ── */
+import fourCousinsRed1 from "@/assets/products/four-cousins-red-1.png";
+import fourthStreet1 from "@/assets/products/4th-street-1.png";
+import capeMore1 from "@/assets/products/cape-more-1.jpg";
+import dominioRose1 from "@/assets/products/dominio-rose-1.jpg";
+import andreRose1 from "@/assets/products/andre-rose-1.png";
+import lordsGin1 from "@/assets/products/lords-gin-1.png";
+import monnet1 from "@/assets/products/monnet-1.png";
+import actionBitters1 from "@/assets/products/action-bitters-1.png";
+import originBitters1 from "@/assets/products/origin-bitters-1.png";
+import oldCaptain1 from "@/assets/products/old-captain-1.jpg";
+import squadron1 from "@/assets/products/squadron-1.jpg";
+
 /* ── AI-generated brand-specific product images ── */
 import carloRossiImg from "@/assets/products/carlo-rossi.jpg";
 import azulBuenAmigo from "@/assets/products/azul-buen-amigo.png";
+import hennessy1 from "@/assets/products/hennessy-1.jpg";
+import martell1 from "@/assets/products/martell-1.jpg";
+import remyMartin1 from "@/assets/products/remy-martin-1.jpg";
+import smirnoff1 from "@/assets/products/smirnoff-1.jpg";
+import ciroc1 from "@/assets/products/ciroc-1.jpg";
 
-/* ── AI-generated generic unlabeled placeholders (no brand labels) ── */
-import redWine1 from "@/assets/products/red-wine-1.jpg";
-import redWine2 from "@/assets/products/red-wine-2.jpg";
-import redWine3 from "@/assets/products/red-wine-3.jpg";
-import whiteWine1 from "@/assets/products/white-wine-1.jpg";
-import roseWine1 from "@/assets/products/rose-wine-1.jpg";
-import sparkling1 from "@/assets/products/sparkling-1.jpg";
-import whisky1 from "@/assets/products/whisky-1.jpg";
-import vodka1 from "@/assets/products/vodka-1.jpg";
-import vodka2 from "@/assets/products/vodka-2.jpg";
+/* ── Remaining generic placeholders (no brand labels found online) ── */
 import gin1 from "@/assets/products/gin-1.jpg";
-import gin2 from "@/assets/products/gin-2.jpg";
-import cognac1 from "@/assets/products/cognac-1.jpg";
 import cognac2 from "@/assets/products/cognac-2.jpg";
-import cognac3 from "@/assets/products/cognac-3.jpg";
-import rum1 from "@/assets/products/rum-1.jpg";
-import bitters1 from "@/assets/products/bitters-1.jpg";
-import bitters2 from "@/assets/products/bitters-2.jpg";
-import agave1 from "@/assets/products/agave-1.jpg";
 import flask1 from "@/assets/products/flask-1.jpg";
 
 export type ProductCategory =
@@ -65,7 +67,6 @@ export interface Product {
   image: string;
   imageAlt: string;
   imageSource: ImageSource;
-  /** Additional images for gallery display on product detail page */
   gallery?: string[];
   description: string;
   nairaPrice?: number;
@@ -123,9 +124,9 @@ export const products: Product[] = [
     traits: "Fruity • Smooth • Refreshing",
     traitTags: ["Fruity", "Smooth", "Refreshing"],
     brand: "Van Loveren",
-    image: redWine2,
-    imageAlt: "Unlabeled round red wine bottle on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: fourCousinsRed1,
+    imageAlt: "Four Cousins Natural Sweet Red wine bottle, South Africa",
+    imageSource: "photo",
     description: "Fruity and refreshing with a smooth finish. A popular favourite that's easy to enjoy and easy to share.",
     inStock: true, featured: true,
   },
@@ -136,9 +137,9 @@ export const products: Product[] = [
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "André",
-    image: roseWine1,
-    imageAlt: "Unlabeled rosé wine bottle with pink-tinted glass on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: andreRose1,
+    imageAlt: "André Brut Rosé champagne bottle with pink label",
+    imageSource: "photo",
     description: "A delicate rosé with fruity character. Light, fresh and perfect for warm evenings and celebrations.",
     inStock: true,
   },
@@ -149,9 +150,9 @@ export const products: Product[] = [
     traits: "Smooth • Fruity • Easy-Drinking",
     traitTags: ["Smooth", "Fruity", "Easy-Drinking"],
     brand: "4th Street",
-    image: redWine3,
-    imageAlt: "Unlabeled Bordeaux-style red wine bottle on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: fourthStreet1,
+    imageAlt: "4th Street Sweet Red wine bottle with red and gold label, South Africa",
+    imageSource: "photo",
     description: "Smooth, fruity and easy-drinking. An accessible wine that doesn't demand attention but rewards it.",
     inStock: true,
   },
@@ -162,9 +163,9 @@ export const products: Product[] = [
     traits: "Rich • Smooth • Refined",
     traitTags: ["Rich", "Smooth", "Refined"],
     brand: "Cape More",
-    image: redWine1,
-    imageAlt: "Unlabeled tall red wine bottle with dark glass, placeholder product photo",
-    imageSource: "placeholder",
+    image: capeMore1,
+    imageAlt: "Cape More Semi-Sweet Red wine bottle, Spanish red wine",
+    imageSource: "photo",
     description: "Rich and refined with a smooth profile. A step up for those who appreciate depth without complexity.",
     inStock: true,
   },
@@ -204,7 +205,7 @@ export const products: Product[] = [
     traitTags: ["Celebratory", "Crisp", "Refreshing"],
     brand: "Van Loveren",
     image: fourCousinsSparkling1,
-    imageAlt: "Four Cousins Sparkling Natural Sweet wine bottle with gold foil neck and four men illustration label, South Africa",
+    imageAlt: "Four Cousins Sparkling Natural Sweet wine bottle with gold foil neck, South Africa",
     imageSource: "photo",
     gallery: [fourCousinsRose1],
     description: "Crisp and refreshing with a celebratory spirit. For the moments worth marking with a pop.",
@@ -217,9 +218,9 @@ export const products: Product[] = [
     traits: "Delicate • Fruity • Rosé Wine",
     traitTags: ["Delicate", "Fruity", "Rosé"],
     brand: "Dominio",
-    image: roseWine1,
-    imageAlt: "Unlabeled rosé wine bottle with pink-tinted glass, placeholder product photo",
-    imageSource: "placeholder",
+    image: dominioRose1,
+    imageAlt: "Dominio Del Rey Sparkling Rosé wine bottle, Spanish sparkling wine",
+    imageSource: "photo",
     description: "A delicate rosé with a fruity, easy character. Light on the palate, generous in the glass.",
     inStock: true,
   },
@@ -231,7 +232,7 @@ export const products: Product[] = [
     traitTags: ["Smooth", "Fruity", "Approachable"],
     brand: "Cape Discovery",
     image: capeDiscovery1,
-    imageAlt: "Cape Discovery Cape Red wine bottle with compass rose label and mountain silhouette, Western Cape, South Africa",
+    imageAlt: "Cape Discovery Cape Red wine bottle with compass rose label, Western Cape, South Africa",
     imageSource: "photo",
     description: "Smooth and approachable with a fruity profile. A welcoming wine for any table.",
     inStock: true,
@@ -246,7 +247,7 @@ export const products: Product[] = [
     traitTags: ["Bold", "Smooth", "Distinctive"],
     brand: "8 PM",
     image: eightPmWhisky1,
-    imageAlt: "8 PM Premium Black Whisky bottle with gold 8 PM logo and red crest label, amber liquid",
+    imageAlt: "8 PM Premium Black Whisky bottle with gold 8 PM logo and red crest label",
     imageSource: "photo",
     description: "Bold and distinctive with a smooth finish. A whisky that makes its presence known without demanding experience.",
     inStock: true, featured: true, badge: "editors-pick",
@@ -259,7 +260,7 @@ export const products: Product[] = [
     traitTags: ["Rich", "Smooth", "Honeyed"],
     brand: "Zenith",
     image: zenithWhiskyHoney1,
-    imageAlt: "Zenith Whisky & Honey bottle with black label, gold Z crest, red accent, flavoured spirit drink, Nigerian made",
+    imageAlt: "Zenith Whisky & Honey bottle with black label, gold Z crest, Nigerian made",
     imageSource: "photo",
     description: "Rich and smooth with a honeyed warmth. A whisky that leans into comfort — rounded, sweet, generous.",
     inStock: true,
@@ -272,7 +273,7 @@ export const products: Product[] = [
     traitTags: ["Smooth", "Full-Bodied", "Classic"],
     brand: "Black Velvet",
     image: blackVelvet1,
-    imageAlt: "Black Velvet blended Canadian whisky bottle with black label and gold brand name, amber liquid",
+    imageAlt: "Black Velvet blended Canadian whisky bottle with black label and gold brand name",
     imageSource: "photo",
     description: "A classic Canadian whisky — smooth and full-bodied with a timeless profile.",
     inStock: true,
@@ -286,9 +287,9 @@ export const products: Product[] = [
     traits: "Clean • Crisp • Versatile",
     traitTags: ["Clean", "Crisp", "Versatile"],
     brand: "Smirnoff",
-    image: vodka1,
-    imageAlt: "Unlabeled clear glass vodka bottle on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: smirnoff1,
+    imageAlt: "Smirnoff No.21 vodka bottle with iconic red label",
+    imageSource: "brand-asset",
     description: "Clean, crisp and endlessly versatile. The reliable choice for cocktails and mixed drinks.",
     inStock: true, featured: true,
   },
@@ -299,9 +300,9 @@ export const products: Product[] = [
     traits: "Refined • Smooth • Premium",
     traitTags: ["Refined", "Smooth", "Premium"],
     brand: "Cîroc",
-    image: vodka2,
-    imageAlt: "Unlabeled frosted glass vodka bottle on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: ciroc1,
+    imageAlt: "Cîroc premium vodka bottle with frosted glass and blue and white label",
+    imageSource: "brand-asset",
     description: "Refined and premium with a smooth, grape-derived character. A vodka that stands on its own.",
     inStock: true, featured: true, badge: "premium-selection",
   },
@@ -314,9 +315,9 @@ export const products: Product[] = [
     traits: "Classic • Aromatic • Smooth",
     traitTags: ["Classic", "Aromatic", "Smooth"],
     brand: "Lords",
-    image: gin1,
-    imageAlt: "Unlabeled gin bottle with clear glass and slight green tint on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: lordsGin1,
+    imageAlt: "Lords Dry Gin bottle, Nigerian London Dry Gin brand since 1982",
+    imageSource: "photo",
     description: "Classic and aromatic with a smooth finish. A gin that plays well with tonic, or stands alone.",
     inStock: true,
   },
@@ -327,8 +328,8 @@ export const products: Product[] = [
     traits: "Bold • Refreshing • Distinctive",
     traitTags: ["Bold", "Refreshing", "Distinctive"],
     brand: "British Soldier",
-    image: gin2,
-    imageAlt: "Unlabeled tall narrow gin bottle on a dark surface, placeholder product photo",
+    image: gin1,
+    imageAlt: "Unlabeled gin bottle, placeholder product photo",
     imageSource: "placeholder",
     description: "Bold and distinctive with a refreshing edge. A gin with personality — not for the cautious.",
     inStock: true,
@@ -340,10 +341,10 @@ export const products: Product[] = [
     traits: "Smooth • Classic • Full-Bodied",
     traitTags: ["Smooth", "Classic", "Full-Bodied"],
     brand: "Squadron",
-    image: gin1,
-    imageAlt: "Unlabeled gin bottle with clear glass on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
-    description: "Smooth and full-bodied with a classic gin profile. Generous in size, generous in character.",
+    image: squadron1,
+    imageAlt: "Squadron Blended Dark Rum bottle with distinctive concave sides, Nigerian spirit",
+    imageSource: "photo",
+    description: "Smooth and full-bodied with a classic profile. Generous in size, generous in character.",
     inStock: true,
   },
 
@@ -355,9 +356,9 @@ export const products: Product[] = [
     traits: "Refined • Smooth • Elegant",
     traitTags: ["Refined", "Smooth", "Elegant"],
     brand: "Monnet",
-    image: cognac1,
-    imageAlt: "Unlabeled tall elegant cognac bottle with amber liquid on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: monnet1,
+    imageAlt: "Monnet Cognac bottle with elegant amber liquid and historic French cognac branding",
+    imageSource: "photo",
     description: "Refined and elegant with a smooth delivery. A cognac for quiet appreciation.",
     inStock: true,
   },
@@ -368,9 +369,9 @@ export const products: Product[] = [
     traits: "Rich • Sophisticated • Classic",
     traitTags: ["Rich", "Sophisticated", "Classic"],
     brand: "Martell",
-    image: cognac2,
-    imageAlt: "Unlabeled round cognac bottle with amber liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: martell1,
+    imageAlt: "Martell cognac bottle with swift bird medallion logo, amber liquid",
+    imageSource: "brand-asset",
     description: "Rich and sophisticated — one of the great cognac houses. Classic for a reason.",
     inStock: true, featured: true, badge: "premium-selection",
   },
@@ -381,9 +382,9 @@ export const products: Product[] = [
     traits: "Iconic • Refined • Full-Bodied",
     traitTags: ["Iconic", "Refined", "Full-Bodied"],
     brand: "Hennessy",
-    image: cognac3,
-    imageAlt: "Unlabeled squat wide cognac bottle with amber liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: hennessy1,
+    imageAlt: "Hennessy VS cognac bottle with iconic Jasmin arm and halberd crest label",
+    imageSource: "brand-asset",
     description: "Iconic and refined with a full-bodied presence. The cognac that defines the category.",
     inStock: true, featured: true, badge: "vintners-choice",
   },
@@ -394,9 +395,9 @@ export const products: Product[] = [
     traits: "Elegant • Rich • Distinctive",
     traitTags: ["Elegant", "Rich", "Distinctive"],
     brand: "Rémy Martin",
-    image: cognac1,
-    imageAlt: "Unlabeled tall cognac bottle with amber liquid on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: remyMartin1,
+    imageAlt: "Rémy Martin VSOP cognac bottle with centaur logo, amber liquid",
+    imageSource: "brand-asset",
     description: "Elegant and rich with a distinctive character. A cognac of standing and tradition.",
     inStock: true,
   },
@@ -408,7 +409,7 @@ export const products: Product[] = [
     traitTags: ["Smooth", "Classic", "Enjoyable"],
     brand: "Garret",
     image: cognac2,
-    imageAlt: "Unlabeled round cognac bottle with amber liquid, placeholder product photo",
+    imageAlt: "Unlabeled round cognac bottle, placeholder product photo",
     imageSource: "placeholder",
     description: "Smooth and classic with an enjoyable, approachable profile. A brandy for everyday refinement.",
     inStock: true,
@@ -422,9 +423,9 @@ export const products: Product[] = [
     traits: "Rich • Smooth • Distinctive",
     traitTags: ["Rich", "Smooth", "Distinctive"],
     brand: "Old Captain",
-    image: rum1,
-    imageAlt: "Unlabeled dark rum bottle with rich amber liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: oldCaptain1,
+    imageAlt: "Old Captain rum bottle with captain figure, dark Caribbean rum",
+    imageSource: "photo",
     description: "Rich and smooth with a distinctive character. A rum with depth and warmth.",
     inStock: true,
   },
@@ -437,9 +438,9 @@ export const products: Product[] = [
     traits: "Bold • Distinctive • Full-Bodied",
     traitTags: ["Bold", "Distinctive", "Full-Bodied"],
     brand: "Origin",
-    image: bitters1,
-    imageAlt: "Unlabeled bitters bottle with dark herbal liquid on a dark surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: originBitters1,
+    imageAlt: "Orijin Bitters bottle with bold herbal branding, Nigerian herbal alcoholic bitters",
+    imageSource: "photo",
     description: "Bold and full-bodied with a distinctive profile. A specialty spirit for those who know.",
     inStock: true,
   },
@@ -450,9 +451,9 @@ export const products: Product[] = [
     traits: "Aromatic • Bold • Refreshing",
     traitTags: ["Aromatic", "Bold", "Refreshing"],
     brand: "Action",
-    image: bitters2,
-    imageAlt: "Unlabeled small round bitters bottle with dark liquid on a walnut surface, placeholder product photo",
-    imageSource: "placeholder",
+    image: actionBitters1,
+    imageAlt: "Action Bitters bottle with herbal branding, Nigerian alcoholic herbal bitters",
+    imageSource: "photo",
     description: "Aromatic and bold with a refreshing edge. A bitters that brings character to any mix.",
     inStock: true,
   },
@@ -466,7 +467,7 @@ export const products: Product[] = [
     traitTags: ["Smooth", "Distinctive", "Classic"],
     brand: "Good Fathers",
     image: flask1,
-    imageAlt: "Unlabeled classic flask-shaped spirits bottle on a walnut surface, placeholder product photo",
+    imageAlt: "Unlabeled classic flask-shaped spirits bottle, placeholder product photo",
     imageSource: "placeholder",
     description: "Smooth and distinctive with a classic profile. A premium spirit that earns its place.",
     inStock: true,
