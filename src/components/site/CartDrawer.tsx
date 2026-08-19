@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { X, Minus, Plus } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { getProduct } from "@/lib/wines";
+import { siteConfig } from "@/lib/siteConfig";
 
 export function CartDrawer() {
   const { open, setOpen, lines, setQuantity, remove } = useCart();
@@ -83,7 +84,7 @@ export function CartDrawer() {
                         </button>
                       </div>
                       <span className="text-sm text-muted-foreground">
-                        Price on request
+                        Enquire for price
                       </span>
                     </div>
                     <button
@@ -101,13 +102,15 @@ export function CartDrawer() {
 
         <footer className="border-t border-border px-6 py-6">
           <p className="text-xs text-muted-foreground">
-            Prices confirmed on enquiry. Call 08070430838 to place your order.
+            Prices confirmed on enquiry. Call {siteConfig.phone} or message us on WhatsApp to place your order.
           </p>
           <a
-            href="tel:08070430838"
+            href={siteConfig.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-4 flex w-full items-center justify-center bg-accent px-8 py-4 text-xs tracking-[0.24em] text-accent-foreground uppercase transition-colors duration-500 hover:bg-accent/85"
           >
-            Call to Order
+            Order on WhatsApp
           </a>
           <Link
             to="/collection"

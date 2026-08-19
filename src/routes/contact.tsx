@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -10,8 +11,7 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Melatonin Vintner" },
       {
         name: "description",
-        content:
-          "Get in touch with Melatonin Vintner. Call 08070430838. Based in Ishieke.",
+        content: `Get in touch with ${siteConfig.brand}. Call ${siteConfig.phone}. Based in ${siteConfig.location}.`,
       },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -32,7 +32,7 @@ function Contact() {
             <p className="eyebrow">Get in touch</p>
             <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] sm:text-7xl">
               Contact
-              <span className="block italic text-accent">Melatonin Vintner</span>
+              <span className="block italic text-accent">{siteConfig.brand}</span>
             </h1>
           </Reveal>
         </div>
@@ -47,29 +47,42 @@ function Contact() {
                 Phone
               </p>
               <a
-                href="tel:08070430838"
+                href={siteConfig.phoneHref}
                 className="mt-2 block font-display text-2xl text-foreground transition-colors hover:text-accent"
               >
-                08070430838
+                {siteConfig.phone}
+              </a>
+            </div>
+            <div>
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                WhatsApp
+              </p>
+              <a
+                href={siteConfig.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block text-sm text-foreground transition-colors hover:text-accent"
+              >
+                Message us on WhatsApp →
               </a>
             </div>
             <div>
               <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
                 Location
               </p>
-              <p className="mt-2 text-sm text-foreground">Ishieke</p>
+              <p className="mt-2 text-sm text-foreground">{siteConfig.location}</p>
             </div>
             <div>
               <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
                 TikTok
               </p>
               <a
-                href="https://www.tiktok.com/@mellatonin_vintner"
+                href={siteConfig.tiktokHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block text-sm text-foreground transition-colors hover:text-accent"
               >
-                @mellatonin_vintner
+                {siteConfig.tiktok}
               </a>
             </div>
             <div>
@@ -77,12 +90,12 @@ function Contact() {
                 Instagram
               </p>
               <a
-                href="https://www.instagram.com/mellatonin_vintner"
+                href={siteConfig.instagramHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block text-sm text-foreground transition-colors hover:text-accent"
               >
-                @mellatonin_vintner
+                {siteConfig.instagram}
               </a>
             </div>
           </div>

@@ -2,15 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
 import { Link } from "@tanstack/react-router";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Melatonin Vintner" },
+      { title: `About — ${siteConfig.brand}` },
       {
         name: "description",
-        content:
-          "Melatonin Vintner — a premium drinks collection curated for quality, character and experience. Pour better. Live better.",
+        content: `${siteConfig.brand} — a premium drinks collection curated for quality, character and experience. ${siteConfig.tagline}`,
       },
     ],
     links: [{ rel: "canonical", href: "/about" }],
@@ -37,11 +37,11 @@ function About() {
         <Reveal>
           <div className="space-y-6 text-sm leading-relaxed text-muted-foreground">
             <p>
-              Melatonin Vintner is a premium drinks collection based in Ishieke,
-              serving curated wines and liquor selections for every occasion.
-              From fine dining to celebrations, weddings to date nights, dinner
-              parties to quiet evenings — we select for character, balance, and
-              the moments that matter.
+              {siteConfig.brand} is a {siteConfig.subtitle.toLowerCase()} based
+              in {siteConfig.location}, serving curated wines and liquor
+              selections for every occasion. From fine dining to celebrations,
+              weddings to date nights, dinner parties to quiet evenings — we
+              select for character, balance, and the moments that matter.
             </p>
             <p>
               Our collection spans wines, whisky, vodka, gin, cognac and brandy,
@@ -49,8 +49,8 @@ function About() {
               quality, reputation and the experience it delivers in the glass.
             </p>
             <p>
-              We don't just sell drinks. We curate experiences. Quality
-              selections. Classic taste. Exceptional moments.
+              We don't just sell drinks. We curate experiences.{" "}
+              {siteConfig.closingLine}
             </p>
           </div>
         </Reveal>
@@ -76,10 +76,10 @@ function About() {
           <div className="mt-16">
             <h2 className="font-display text-3xl">Get in touch</h2>
             <div className="mt-6 space-y-3 text-sm text-muted-foreground">
-              <p>📞 08070430838</p>
-              <p>📍 Ishieke</p>
-              <p>TikTok: @mellatonin_vintner</p>
-              <p>Instagram: @mellatonin_vintner</p>
+              <p>📞 {siteConfig.phone}</p>
+              <p>📍 {siteConfig.location}</p>
+              <p>TikTok: {siteConfig.tiktok}</p>
+              <p>Instagram: {siteConfig.instagram}</p>
             </div>
             <Link
               to="/contact"

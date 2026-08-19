@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { WineCard } from "@/components/site/WineCard";
 import { useCart } from "@/lib/cart";
 import { categoryLabel, badgeLabel, getProduct, products } from "@/lib/wines";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const Route = createFileRoute("/collection/$slug")({
   loader: ({ params }) => {
@@ -96,13 +97,20 @@ function ProductDetail() {
 
       <article className="mx-auto grid max-w-[1400px] gap-14 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:py-20">
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
-          <img
-            src={product.image}
-            alt={product.imageAlt}
-            width={912}
-            height={1200}
-            className="w-full bg-secondary/40 object-cover"
-          />
+          <div className="relative">
+            <img
+              src={product.image}
+              alt={product.imageAlt}
+              width={912}
+              height={1200}
+              className="w-full bg-secondary/40 object-cover"
+            />
+            {product.imageSource === "placeholder" && (
+              <span className="absolute bottom-4 left-4 border border-border/60 bg-background/70 px-3 py-1.5 text-[0.6rem] tracking-[0.16em] text-muted-foreground/80 uppercase">
+                Photo coming soon
+              </span>
+            )}
+          </div>
         </Reveal>
 
         <div>
@@ -121,9 +129,19 @@ function ProductDetail() {
             <p className="mt-3 text-base text-muted-foreground">
               {product.brand}
             </p>
-            <p className="mt-8 font-display text-3xl text-accent">
-              Price on request
-            </p>
+            <div className="mt-8">
+              <p className="text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase">
+                Price
+              </p>
+              <a
+                href={siteConfig.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-block font-display text-3xl text-accent transition-colors hover:text-accent/80"
+              >
+                Enquire for price →
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={100}>

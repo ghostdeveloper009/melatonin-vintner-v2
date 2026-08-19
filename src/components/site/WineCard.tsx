@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useCart } from "@/lib/cart";
 import { badgeLabel, type Product } from "@/lib/wines";
+import { siteConfig as config } from "@/lib/siteConfig";
 
 export function WineCard({ wine: product }: { wine: Product }) {
   const { add, setOpen } = useCart();
@@ -32,6 +33,11 @@ export function WineCard({ wine: product }: { wine: Product }) {
             {badgeLabel(product.badge)}
           </span>
         )}
+        {product.imageSource === "placeholder" && (
+          <span className="absolute bottom-4 left-4 border border-border/60 bg-background/70 px-2.5 py-1 text-[0.55rem] tracking-[0.14em] text-muted-foreground/80 uppercase">
+            Photo coming soon
+          </span>
+        )}
       </Link>
 
       <div className="mt-5 flex flex-1 flex-col">
@@ -53,9 +59,14 @@ export function WineCard({ wine: product }: { wine: Product }) {
         </p>
 
         <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-          <span className="text-[0.65rem] tracking-[0.18em] text-muted-foreground uppercase">
-            Price on request
-          </span>
+          <a
+            href={config.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[0.65rem] tracking-[0.18em] text-accent uppercase link-underline"
+          >
+            Enquire for price
+          </a>
           <div className="flex items-center gap-4">
             <Link
               to="/collection/$slug"
